@@ -1,0 +1,167 @@
+<app-layout-service>
+  <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">{{title}}
+  </ion-label>
+  <div headerIcon>
+    <ion-icon style="cursor: pointer" [ngClass]="theme.color" (click)="goTo('notifications')" name="notifications">
+    </ion-icon>
+    <ion-icon style="cursor: pointer" class="newspaper-icon" (click)="goTo('historique')" [ngClass]="theme.color"
+      name="newspaper"></ion-icon>
+  </div>
+  <ion-searchbar [ngClass]="theme.searchbar" inputPlace placeholder=""></ion-searchbar>
+
+
+  <ng-container content="">
+    <ion-card mode="ios" id="contenuService"
+      [class]="theme.colorServiceCard+' '+theme.scrollbar + ' mere-card ion-padding'">
+      <div>
+        <div class="top-icon-title">
+          <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">
+            {{title}}</ion-label>
+          <div class="icon-right" headerIcon>
+            <ion-icon style="cursor: pointer" (click)="goTo('notifications')" [ngClass]="theme.color"
+              name="notifications"></ion-icon>
+            <ion-icon style="cursor: pointer" class="newspaper-icon" (click)="goTo('historique')"
+              [ngClass]="theme.color" name="newspaper"></ion-icon>
+            <!--<ion-icon class="ion-float-end icon ion-padding-horizontal" name="list-outline" (click)="switchAddView()"></ion-icon>
+            <ion-icon class="ion-float-end icon ion-padding-horizontal" name="add-outline" (click)="switchHistoryView()"></ion-icon>-->
+          </div>
+        </div>
+        <!--<div class="d-none">
+          <ion-searchbar [ngClass]="theme.searchbar" (keydown)="myAutoMapComplete($event)" [(ngModel)]="input"
+            inputPlace placeholder=""></ion-searchbar>
+          <ion-searchbar [ngClass]="theme.searchbar" (keydown)="myAutoMapComplete($event)" [(ngModel)]="input"
+            inputPlace placeholder=""></ion-searchbar>
+        </div>-->
+
+      </div>
+
+
+      <!-- <div class="searchbar-input-container sc-ion-searchbar-ios"><input aria-label="search text"
+           spellcheck="false">
+      </div> -->
+      <div class="searchbox">
+        <svg  aria-hidden="true" viewBox="0 0 24 24">
+          <path
+            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+        </svg>
+        <input [class]="theme.family" aria-label="Search for a place on the map" autocomplete="off" inputmode="search"
+          class="border-radius searchbar-input sc-ion-searchbar-ios" (keydown.enter)="$event.preventDefault()"
+          placeholder="Rechercher une place" #search type="search" />
+      </div>
+
+      <!-- <input [ngClass]="theme.searchbar" type="text" class="my-search-box" (keydown.enter)="$event.preventDefault()"
+      placeholder="Search Location" type="text" #search /> -->
+
+
+      <!--<div>
+      <ion-searchbar
+        aria-label="Custom input"
+        placeholder="Rechercher une ville"
+        type="search"
+        [class]="theme.input"
+        (keydown)="myAutoMapComplete($event)"
+        [(ngModel)]="input"
+        [ngStyle]="{'--background': theme.colorInput, '--border-radius': '15px'}"
+      ></ion-searchbar>
+    </div>-->
+      <div *ngIf="showComplete">
+        <ion-item (click)="reservDescript(completion)" *ngFor="let completion of autoCompletepredictions">
+          <ion-label> {{completion.display_name}} </ion-label>
+        </ion-item>
+      </div>
+
+      <div *ngIf="duration">
+        <ion-row>
+          <ion-col size="10">
+            <ion-item lines="none">
+              <ion-icon name="car-outline"></ion-icon>
+              <div class="ion-padding">
+                <p class="list-lab">Véhicule personnel</p>
+                <p class="list-lab">{{duration}}</p>
+                <p class="list-lab">{{distance}}</p>
+              </div>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2" class="smallCol">
+            <ion-icon name="star-outline"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div *ngIf="showComplete">
+        <ion-item (click)="reservDescript(completion)" *ngFor="let completion of autoCompletepredictions">
+          <ion-label> {{completion.description}} </ion-label>
+        </ion-item>
+      </div>
+
+
+      <br>
+
+      <ion-list [class]="theme.scrollbar+' scroller'">
+        <ion-item (click)="openMap('WALKING')">
+          <ion-icon [class]="theme.color" name="bicycle" slot="start"></ion-icon>
+          <ion-label [class]="theme.family+' f-size-14'">
+            <p class=" list-lab">Vélo</p>
+            <p class="list-lab"> {{getMinutes(currentTraject.durations?.bike)}} </p>
+          </ion-label>
+          <ion-icon [class]="theme.color" (click)="makeFavorite('velo')"
+            [name]="isFavorite('velo') ? 'star-sharp' : 'star-outline'" name="star-outline" slot="end"></ion-icon>
+        </ion-item>
+
+        <ion-item (click)="openMap('DRIVING')">
+          <ion-icon [class]="theme.color" name="car" slot="start"></ion-icon>
+          <ion-label [class]="theme.family+' f-size-14'">
+            <p class="list-lab">Taxi</p>
+            <p class="list-lab"> {{getMinutes(currentTraject.durations?.taxi)}} </p>
+          </ion-label>
+          <ion-icon [class]="theme.color" (click)="makeFavorite('taxi')"
+            [name]="isFavorite('taxi') ? 'star-sharp' : 'star-outline'" slot="end"></ion-icon>
+        </ion-item>
+
+        <ion-item (click)="openMap('WALKING')">
+          <ion-icon [class]="theme.color" name="walk" slot="start"></ion-icon>
+          <ion-label [class]="theme.family+' f-size-14'">
+            <p class="list-lab">Piéton</p>
+            <p class="list-lab"> {{getMinutes(currentTraject.durations?.walking)}} </p>
+          </ion-label>
+          <ion-icon [class]="theme.color" (click)="makeFavorite('pieton')"
+            [name]="isFavorite('pieton') ? 'star-sharp' : 'star-outline'" name="star-outline" slot="end"></ion-icon>
+        </ion-item>
+
+        <ion-item (click)="openMap('DRIVING')">
+          <ion-icon [class]="theme.color" name="train" slot="start"></ion-icon>
+          <ion-label [class]="theme.family+' f-size-14'">
+            <p class="list-lab">Transport en commun</p>
+            <p class="list-lab"> {{getMinutes(currentTraject.durations?.ridesharing)}} </p>
+          </ion-label>
+          <ion-icon [class]="theme.color" (click)="makeFavorite('commun')"
+            [name]="isFavorite('commun') ? 'star-sharp' : 'star-outline'" name="star-outline" slot="end"></ion-icon>
+        </ion-item>
+
+        <ion-item (click)="openMap('DRIVING')">
+          <ion-icon [class]="theme.color" name="car-sport" slot="start"></ion-icon>
+          <ion-label [class]="theme.family+' f-size-14'">
+            <p class="list-lab">Voiture Personnelle</p>
+            <p class="list-lab"> {{getMinutes(currentTraject.durations?.car)}} </p>
+          </ion-label>
+          <ion-icon [class]="theme.color" (click)="makeFavorite('voiture')"
+            [name]="isFavorite('voiture') ? 'star-sharp' : 'star-outline'" name="star-outline" slot="end"></ion-icon>
+        </ion-item>
+      </ion-list>
+
+    </ion-card>
+  </ng-container>
+
+  <div class="bottomSheet-container">
+
+    <div id="cartoTransportBottomSheet" class="bottomSheet">
+      <ion-row (click)="closeBottomSheet()">
+        <ion-col class="ion-text-end close-icon ">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <div id="map" style="height: 400px; width: 100%"></div>
+    </div>
+  </div>
+
+
+</app-layout-service>

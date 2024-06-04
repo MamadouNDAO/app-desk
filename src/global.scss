@@ -1,0 +1,981 @@
+@use './theme/variables.scss' as v;
+
+@font-face {
+  font-family: 'Century Gothic';
+  src: url('../assets/century-gothic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+ // font-family: 'Century Gothic', sans-serif !important;
+}
+
+
+
+
+//#247645 vert
+// #9f5e4a red
+/*
+
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap');
+
+
+.roboto{
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.century{
+  font-family: 'Century Gothic', sans-serif !important;
+}
+.isActive {
+  color: black !important;
+}
+
+.brd-white{
+  border: solid 1px #dedede;
+}
+.ivi-bg-white{
+  background: #626262;
+}
+
+a{
+  text-decoration: none;
+}
+
+$secondary-col:rgb(243, 243, 243);
+$secondary:rgb(243, 243, 243) ;
+$blanc:rgba(255,255,255);
+$primary:#514e4c;
+
+.f-size-14{
+  font-size: 14px !important;
+}
+
+.curs-point{
+  cursor: pointer;
+}
+
+.my-card-detail-product .alert-wrapper {
+  min-height: 300px;
+  margin-left: 23% !important;
+  border-radius: 10px !important;
+
+  .card-detail-prd{
+    .detail-prd-title{
+      text-align: center;
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgb(243,243,243);
+      padding-bottom: 10px;
+    }
+
+    .detail-icon-prix{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      ion-icon{
+      }
+    }
+
+    .detail-desc{
+      margin-top: 15px;
+      text-align: initial;
+      font-size: 12px;
+    }
+
+    .detail-counter{
+      margin-top: 15px;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      ion-icon{
+        font-size: 30px;
+        cursor: pointer;
+      }
+    }
+
+    .div-btn{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .detail-btn{
+      margin: auto;
+    }
+  }
+}
+.principal{
+  background-color:  $secondary !important;
+  height: 100%;
+}
+
+.divider{
+  background: $secondary-col;
+  height: 2px;
+  width: 70%;
+  margin: 10px auto;
+}
+
+.label{
+  font-size: 14px;
+}
+
+.list-lab{
+  font-size: 14px !important;
+  color: #333 !important;
+  margin: 4px 8px;
+
+}
+
+textarea:focus{
+  outline: none;
+}
+
+.title-app{
+  font-size: 16px !important;
+
+}
+
+.list-lab-m{
+  font-size: 15px !important;
+  color: #666666 !important;
+  // margin: 4px 4px;
+
+}
+
+.list-lab-link{
+  font-size: 13px;
+  color: #666666 !important;
+  margin: 4px 8px;
+
+}
+.list-lab-text{
+  font-size: 13px;
+  color: #666666 !important;
+  margin: 4px 8px;
+
+}
+
+.productIcon,.productIconSum{
+  font-size: 30px;
+  color: $primary;
+}
+
+.productName{
+  font-size: 14px;
+}
+
+
+.btn-app{
+    min-width: 80px;
+    height: 30px !important;
+    border-radius: 25px !important;
+    font-size: 16px !important;
+    background-color: #514e4c ;
+    color: white !important;
+    padding: 6px 24px;
+}
+
+.custom-modal .modal-wrapper{
+  --height: 50% !important;
+   margin: auto 2rem;
+   border-radius: 20px  !important;
+ }
+
+ .my-custom-class .alert-wrapper {
+   min-height: 30%;
+
+ }
+
+   .my-custom-class-didact .modal-wrapper {
+   width: 80% !important;
+ }
+
+ .alert-wrapper.sc-ion-alert-ios{
+  border-radius: 13px !important;
+ }
+
+ .dadact-header{
+  align-items: center;
+ }
+ .dadact-icon{
+   font-size: 35px;
+ }
+
+ .didact-icon2{
+   font-size: 25px;
+   float: right;
+ }
+
+
+// bottomsheet style
+
+.bottomSheet{
+  position: fixed;
+  display: none;
+  width: 100%;
+  bottom: 0;
+  border-radius: 30px 30px 0px 0px;
+  z-index: 20;
+  background-color: $blanc;
+  transform: translate3d(0,0,0);
+  padding: 1rem;
+}
+
+.bottomSheetProductName{
+  color: $primary;
+}
+.bottomSheetProductprice{
+  color: $primary;
+  font-size: 18px;
+}
+.bottomSheetNameDiv{
+  text-align: center;
+  border-bottom: 0.5px solid $secondary;
+}
+.bottomSheetProductDescription{
+  font-size: 13px;
+  color: $primary;
+}
+.paymentMessage{
+  color: #514e4c;
+    font-size: 15px;
+}
+
+.tabs-inner{
+ width: 750px;
+ margin-inline: auto;
+}
+
+.mytoolbar{
+  background-color: rgb(243, 243, 243);
+  margin-bottom: 1rem;
+}
+
+.mytoolbar .colStart {
+  display: flex;
+  justify-content: center;
+}
+
+.mytoolbar .colStart img{
+  width: 5rem;
+    height: 2.8rem;
+}
+
+.mytoolbar-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mytoolbar-title{
+  margin-top: 1rem;
+}
+
+.mytoolbar-icon ion-icon.icon1{
+    color: #514e4c;
+    font-size: 32px;
+    margin-right: 0.1rem;
+    margin-bottom: 0.2rem;
+}
+.mytoolbar-icon ion-icon.icon{
+  color: #514e4c;
+  font-size: 32px;
+  margin-right: 0.1rem;
+  margin-bottom: 0.2rem;
+}
+
+
+.mytoolbar-icon .iconHistorique{
+  color: #514e4c;
+  font-size: 32px;
+  margin-right: 0.1rem;
+  margin-bottom: 0.2rem;
+
+}
+
+.inst-part{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
+  border-radius: 5px;
+ padding-left: 10px;
+  cursor: pointer;
+}
+
+.social-bx{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  .insta{
+    color: #C13584;
+  }
+
+
+
+  .face{
+    color: #4267B2;
+  }
+
+  .yout{
+    color: #FF0000;
+  }
+
+  .what{
+    color: #25D366;
+  }
+}
+
+.fond-input-sci{
+  background: #EDD1CA !important;
+  color: #000;
+}
+
+//Color menu
+.sci-color-passive{
+  color: #d59886 !important;
+}
+
+.pmu-color-passive{
+  color: rgb(128,158,139) !important;
+  //color: #009242 !important;
+}
+
+.sci-color-active{
+  color: var(--ion-red) !important;
+  //color: #4A2216 !important;
+}
+
+.pmu-color-active{
+  color: #005024 !important;
+}
+
+.color-white-icon{
+  color: #fff;
+}
+
+// service app container
+
+
+
+.svce-block{
+  height: 100vh;
+}
+
+.svce-menu{
+  // border: 1px solid red;
+  width: 300px;
+  background-color: rgb(243, 243, 243);
+
+
+}
+
+.mere-card{
+  //background: rgb(233, 222, 218);
+  //background: rgb(224, 232, 227);
+  height: 90%;
+  margin: auto;
+  position: relative;
+  overflow: hidden !important;
+  border-radius: 0 !important;
+}
+
+.service-green{
+  background: rgb(224, 232, 227);
+}
+
+.service-red{
+  background: rgb(233, 222, 218);
+}
+
+.fille-card{
+  margin-bottom: 20px;
+}
+
+
+
+.svce-historique{
+  //border: 3px solid black;
+  width: 400px;
+
+}
+
+.svce-historique-content{
+  height: 75vh !important;
+  border-radius: 25px;
+  padding: 1rem;
+  overflow-y: scroll;
+}
+
+.split-pane-side{
+  border-left: 0px;
+  border-right: var(--border);
+  border-top: 0px;
+  border-bottom: 0px;
+  min-width: 100px !important;
+  max-width: var(--side-max-width);
+}
+
+main.inner-scroll{
+  overflow: hidden !important;
+}
+
+.unify-icon{
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.hist-search-bar{
+  --border-radius: 20px;
+  --background: #9f8a83 !important;
+}
+
+// ------------------------------- THEME RED ---------------------------------------------------------------------------
+
+.ivi-red {
+  color: var(--ion-red) !important;
+}
+
+.ivi-bg-red {
+  background-color: var(--ion-red) !important;
+}
+
+.ivi-bg-image-red {
+  background-blend-mode: inherit;
+  background:
+    linear-gradient(45deg, rgba(100, 43, 25, 0.8), rgba(146, 66, 41, 0.8), rgba(174, 80, 51, 0.8)),
+  url('assets/societemere.png');
+  background-size: cover;
+}
+
+.input-white{
+  background: rgb(242, 242,242);
+  border: solid 1px rgb(191, 191, 191);
+  color: rgb(66, 66, 66) !important;
+}
+
+.input-green{
+  background: #e7f5e2;
+  border: solid 1px rgb(191, 191, 191);
+  color: rgba(0, 111, 46, 0.8) !important;
+}
+
+.input-red{
+  background: #f5e7e2;
+  border: solid 1px rgb(191, 191, 191);
+  color: rgb(66, 66, 66) !important;
+}
+
+.input-white::placeholder{
+  color: rgb(191, 191, 191) !important;
+}
+
+.ivi-box-shadow{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+  //box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.bg-white-gris{
+  background: rgb(127, 127, 127);
+  color: #fff;
+}
+
+.bg-white-green{
+  background: rgb(1, 62, 23) !important;
+  color: #fff;
+}
+
+.bg-btn-red{
+  --background: var(--ion-red) !important;
+  color: #fff;
+}
+
+.ivi-bg-image-white {
+  background-blend-mode: inherit;
+  background:
+    linear-gradient(45deg, rgba(248, 242, 242, 0.8), rgba(246, 246, 246, 0.8), rgba(239, 239, 239, 0.8)),
+     url('assets/img-diagonal.png'),
+    url('assets/societemere.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.ivi-title-red {
+  font-weight: bold !important;
+  font-size: 1.5 rem !important;
+  color: var(--ion-red) !important;
+}
+
+.ivi-title-list {
+  font-weight: bold;
+  font-size: 1.5 rem;
+  color: white;
+}
+
+.ivi-icon-red {
+  color: var(--ion-red);
+}
+
+.ivi-hover-red {
+
+}
+
+.ivi-hover-red:hover {
+  color: #c9c9c9 !important;
+  --color: #c9c9c9 !important;
+  --color-hover: #c9c9c9 !important;
+  cursor: pointer !important;
+}
+
+ion-item:hover .ivi-hover-red {
+  color: #c9c9c9 !important;
+}
+
+ion-input.ivi-input-red {
+  --background: #f5e7e2 !important;
+  --color: #4a2216  !important;
+  --placeholder-color: #ddd  !important;
+  --placeholder-opacity: .7 !important;
+
+  --padding-bottom: 10px  !important;
+  --padding-end: 10px !important;
+  --padding-start: 10px;
+  --padding-top: 10px;
+  --border-radius: 15px;
+  border-radius: 15px;
+}
+
+ion-searchbar.ivi-searchbar-red {
+  --background: #fff !important; //#f5e7e2
+  --color: #4a2216  !important;
+  --placeholder-color: #ddd  !important;
+  --placeholder-opacity: .7 !important;
+
+  --padding-bottom: 10px  !important;
+  --padding-end: 10px !important;
+  --padding-start: 10px;
+  --padding-top: 10px;
+  --border-radius: 0 ;
+  border-radius: 0;
+}
+
+.scroller{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 85%
+}
+
+
+.scrollbar-red::-webkit-scrollbar {
+  width: 0.5em;
+  height: 50px !important;
+}
+
+.scrollbar-red::-webkit-scrollbar-track {
+  //-webkit-box-shadow: inset 0 0 6px rgba(245, 13, 13, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(245, 13, 13, 0.3);
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+.scrollbar-red::-webkit-scrollbar-thumb {
+  background-color: var(--ion-red);
+  outline: 1px solid var(--ion-red);
+}
+
+.ivi-welcome-text-red {
+  color: #e6bdaf;
+}
+
+.menu-bg-red {
+  background: white;
+  --background: white;
+}
+// ----------------- THEME RED -----------------------------
+
+// ----------------- THEME GREEN -----------------------------
+.ivi-green {
+  color: var(--ion-green) !important;
+}
+
+.ivi-bg-green-backround {
+  background-color: var(--ion-green);
+}
+
+.ivi-bg-green {
+  background-color: rgb(1, 62, 23);
+}
+
+.ivi-bg-green:hover {
+  background-color: rgb(1, 62, 23) !important;
+}
+
+.ivi-bg-image-green {
+  background-blend-mode: inherit;
+  background:
+    linear-gradient(45deg, rgba(0, 61, 22, 0.8), rgba(0, 92, 37, 0.8), rgba(0, 111, 46, 0.8)), url('assets/horse.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.ivi-title-green {
+  font-weight: bold !important;
+  font-size: 1.5 rem !important;
+  color: var(--ion-green) !important;
+}
+
+.ivi-icon-green {
+  color: var(--ion-green);
+}
+
+.ivi-icon-green {
+  color: var(--ion-green);
+}
+
+.ivi-hover-green {
+  //color: var(--ion-green);
+
+}
+
+.ivi-hover-green:hover {
+  color: var(--ion-green) !important;
+  --color: var(--ion-green) !important;
+  --color-hover: var(--ion-green) !important;
+  cursor: pointer !important;
+}
+
+.ivi-hover-green:hover {
+  color: var(--ion-green) !important;
+}
+
+ion-input.ivi-input-green {
+  --background: #e5f5e2 !important;
+  --color: var(--ion-green)  !important;
+  --placeholder-color: #ddd  !important;
+  --placeholder-opacity: .7 !important;
+
+  --padding-bottom: 10px  !important;
+  --padding-end: 10px !important;
+  --padding-start: 10px;
+  --padding-top: 10px;
+  --border-radius: 15px;
+  border-radius: 15px;
+}
+
+ion-searchbar.ivi-searchbar-green {
+  --background: #fff !important;
+  --color: var(--ion-green)  !important;
+  --placeholder-color: #ddd  !important;
+  --placeholder-opacity: .7 !important;
+  --icon-color: var(--ion-green);
+  --padding-bottom: 10px  !important;
+  --padding-end: 10px !important;
+  --padding-start: 10px;
+  --padding-top: 10px;
+  --border-radius: 0;
+  border-radius: 0;
+}
+
+
+.scrollbar-green::-webkit-scrollbar {
+  width: 0.5em;
+  height: 50px !important;
+}
+
+.scrollbar-green::-webkit-scrollbar-track {
+  //-webkit-box-shadow: inset 0 0 6px rgba(63, 245, 13, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(173, 173, 173, 0.52);
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+.scrollbar-green::-webkit-scrollbar-thumb {
+  background-color: var(--ion-green);
+  outline: 1px solid var(--ion-green);
+}
+.ivi-welcome-text-green {
+  color: var(--ion-green);
+}
+
+.menu-bg-green {
+  background: white;
+  --background: white;
+}
+
+.sub-menu-bg-green {
+  background: #f1f2f6;
+  --background: #f1f2f6;
+}
+
+// ----------------- THEME GREEN -----------------------------
+
+// ----------------- THEME GREY -----------------------------
+.ivi-grey {
+  color: var(--ion-grey) !important;
+}
+
+.ivi-bg-grey {
+  background-color: var(--ion-grey);
+}
+
+.ivi-bg-grey {
+  background-color: var(--ion-grey);
+}
+
+.ivi-bg-image-grey {
+  background-blend-mode: inherit;
+  background: light-grey;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.ivi-title-grey {
+  font-weight: bold !important;
+  font-size: 1.5 rem !important;
+  color: var(--ion-grey) !important;
+}
+
+.ivi-icon-grey {
+  color: var(--ion-grey);
+}
+
+.ivi-icon-grey {
+  color: var(--ion-grey);
+}
+
+
+.ivi-hover-green:hover {
+  color: var(--ion-green) !important;
+  --color: var(--ion-green) !important;
+  --color-hover: var(--ion-green) !important;
+  cursor: pointer !important;
+}
+
+ion-item:hover .ivi-hover-green {
+  color: var(--ion-green) !important;
+}
+
+ion-input.ivi-input-green {
+  --background: #e5f5e2 !important;
+  --color: var(--ion-grey) !important;
+  --placeholder-color: #ddd  !important;
+  --placeholder-opacity: .7 !important;
+
+  --padding-bottom: 10px  !important;
+  --padding-end: 10px !important;
+  --padding-start: 10px;
+  --padding-top: 10px;
+  --border-radius: 15px;
+  border-radius: 15px;
+}
+.menu-bg-grey {
+  background: #f2f2f2;
+  --background: #f2f2f2;
+}
+
+.scrollbar-grey {
+  background: #f2f2f2;
+  --background: #f2f2f2;
+}
+.scrollbar-grey::-webkit-scrollbar {
+  width: 0.5em;
+  height: 50px !important;
+}
+
+.scrollbar-grey::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(10, 10, 10, 0.3);
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+.scrollbar-grey::-webkit-scrollbar-thumb {
+  background-color: var(--ion-grey);
+  outline: 1px solid var(--ion-grey);
+}
+.ivi-welcome-text-grey {
+  color: var(--ion-grey);
+}
+
+// ----------------- THEME GREEN -----------------------------
+
+#contenuService {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.fixed-top{
+  position: fixed;
+}
+
+.top-icon-title{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  .icon-right{
+    position: absolute;
+    float: right;
+    right: 25px;
+    top: 15px;
+  }
+  .icon-left{
+    position: absolute;
+    float: left;
+    left: 25px;
+    top: 15px;
+  }
+}
+ion-list {
+  --background: transparent !important;
+  background: transparent !important;
+}
+
+ion-item {
+  --background: transparent !important;
+  background: transparent !important;
+}
+
+ion-card {
+  box-shadow: none !important;
+}
+
+//#contenuService::-webkit-scrollbar {
+//  width: 0.5em;
+//  height: 50px !important;
+//}
+//
+//#contenuService::-webkit-scrollbar-track {
+//  -webkit-box-shadow: inset 0 0 6px rgba(245, 13, 13, 0.3);
+//  margin-top: 18px;
+//  margin-bottom: 18px;
+//  //border-radius: 15%;
+//}
+//
+//
+//#contenuService::-webkit-scrollbar-thumb {
+//  background-color: var(--ion-red);
+//  outline: 1px solid var(--ion-red);
+//}
+
+.bottomSHeet{
+/*  width: 100% !important;
+  left: 0;*/
+}
+
+//  modalll
+
+.colEnd{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.btnSubmit{
+  //background-color: #666666;
+  border-radius: 100%;
+  width: 40px;
+    height: 40px;
+    color: #fff;
+
+}
+
+.btn-comment{
+  color: #0d0d0d !important;
+  text-decoration: none;
+  font-family: 'Century Gothic', sans-serif;
+  font-size: 15px;
+}
+
+.btn-me{
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+ion-button{
+  --background: none;
+  --box-shadow: none;
+  border-radius: 0 !important;
+}
+
+ion-button:hover{
+  --background: initial !important;
+}
+
+
+.iconEnd{
+  font-size: 20px;
+}
+
+.close-bloc{
+  text-align: center;
+}
+
+ion-form ion-label{
+  font-family: 'Century Gothic', sans-serif !important;
+  font-size: 14px !important;
+  color: #666666;
+}
+
+.newspaper-icon{
+  margin-left: 15px;
+}
+
+ion-icon{
+  font-size:22px;
+}
+
+.header-title{
+  font-size: 16px !important;
+}
+
+
+.timepicker-overlay[_ngcontent-tbx-c94]{
+  left: 150px !important;
+}
+
+
+.griser{
+  color: #adb5bd !important;
+  cursor: auto !important;
+}
+
+
+.btn-reserver{
+  padding: 10px;
+  border: none;
+  color: #fff;
+}

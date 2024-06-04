@@ -1,0 +1,120 @@
+
+
+
+
+
+
+<div  class="container-layout" [ngClass]="theme.family" >
+  <div class="container-split" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+    <div [class]="theme.bg+' my-spit-plane'" >
+      <div class="menu-top-split" >
+        <ion-icon [ngClass]="isRouteActive('/reservation_espace') ? theme.colorWhite : theme.colorWhite" routerLinkActive="selected" routerLink="/reservation_espace" class="unify-icon my-cursor" aria-hidden="true" slot="start" name="book" ></ion-icon>
+        <ion-icon [hidden]="isPMU" [ngClass]="isRouteActive('/fil_actualites') ? theme.colorWhite : theme.colorWhite" routerLinkActive="selected" routerLink="/fil_actualites" class="unify-icon my-cursor" aria-hidden="true" slot="start" name="calendar-clear" ></ion-icon>
+        <ion-icon [hidden]="isPMU" [ngClass]="isRouteActive('/cartographie') ? theme.colorWhite : theme.colorWhite" routerLinkActive="selected" routerLink="/cartographie" class="unify-icon my-cursor" aria-hidden="true" slot="start" name="map" ></ion-icon>
+
+      </div>
+      <div class="menu-bottom-split">
+        <ion-icon routerLink="/profile" class="unify-icon my-cursor" aria-hidden="true" slot="start" name="menu" ></ion-icon>
+        <ion-icon   class="unify-icon " routerLink="/parametres"  name="settings" ></ion-icon>
+      </div>
+    </div>
+
+    <div *ngIf="showMenu"
+         style="" [class]="theme.menubg +' menu-side'">
+      <div [class]="theme.bg+ ' ivi-title ion-padding'"
+           style="width: 235px;position: relative; left: -10px; top: 18px; color: white; font-weight: bold">
+        <ion-label style="font-size: 14px !important; margin-left: 25px">Services</ion-label>
+      </div>
+      <br>
+      <ion-list  style="padding-top: 10px!important;">
+        <div slot="content" [class]="theme.scrollbar+' ionlistscroll'" >
+
+          <div *ngFor="let label of services"  [class.hidden]="!Object.values(label.roles).includes(userRole) && !Object.values(label.roles).includes(1000)">
+            <a  *ngIf="label.serviceUrl != null && label.serviceUrl != 'null'" (click)="ishowinformer('/'+label.serviceUrl)"  auto-hide="false" [href]="label.serviceUrl" target="_blank" routerLinkActive="selected">
+              <ion-item  lines="none" (mouseenter)="test(label.id)">
+                <ion-icon class="list-icon" [class]="theme.hover" [ngClass]="isRouteActive(label.key) ? theme.colorActive : theme.colorPassive" aria-hidden="true" slot="start" [ios]="label.icon_desk" [md]="label.icon_desk"></ion-icon>
+                <ion-label [class]="theme.hover+' '+theme.family+' ion-text-wrap '"
+                           [ngClass]="isRouteActive('/'+label.key) ? theme.colorActive : theme.colorPassive"
+                           style="font-size: 14px !important;"
+                >{{ label.label }}</ion-label>
+              </ion-item>
+            </a>
+            <a   *ngIf="label.serviceUrl == null || label.serviceUrl == 'null'" (click)="ishowinformer(label.key)"  auto-hide="false" [routerLink]="'/'+label.key" routerLinkActive="selected">
+              <ion-item  lines="none" (mouseenter)="test(label.id)">
+                <ion-icon [class.griser]="label.label=='Parking'" class="list-icon" [class]="label.label=='Gestion des missions' ? ' ' : theme.hover" [ngClass]="isRouteActive('/'+label.key) ? theme.colorActive : theme.colorPassive" aria-hidden="true" slot="start" [ios]="label.icon_desk" [md]="label.icon_desk"></ion-icon>
+                <ion-label [class.griser]="label.label=='Parking'" [class]=" theme.hover+' '+theme.family+' ion-text-wrap '"
+                           [ngClass]="isRouteActive('/'+label.key) ? theme.colorActive : theme.colorPassive"
+                           style="font-size: 14px !important;"
+                >{{ label.label }}</ion-label>
+              </ion-item>
+            </a>
+
+          </div>
+          <br><br><br><br><br>
+          <!--        <ion-accordion-group>-->
+          <!--          <ion-accordion value="first" toggleIcon="map" toggleIconSlot="start">-->
+          <!--            <ion-item slot="header" color="light">-->
+          <!--              <ion-label>First Accordion</ion-label>-->
+          <!--            </ion-item>-->
+          <!--            <div class="ion-padding" slot="content">-->
+          <!--              First Content-->
+          <!--            </div>-->
+          <!--          </ion-accordion>-->
+          <!--        </ion-accordion-group>-->
+        </div>
+
+      </ion-list>
+    </div>
+    <div *ngIf="showSubMenu"
+         style="width: 225px; height: 90vh;position: relative;left:-0px; top:100px;" [class]="theme.subMenuBg+' animate__animated animate__fadeInLeft'">
+      <div [class]="theme.bg+ ' ivi-title ion-padding'"
+           style="width: 235px;position: relative; left: -10px; top: 18px; color: white; font-weight: bold">
+        <ion-label style="font-size: 14px !important; margin-left: 25px;">S'informer</ion-label>
+      </div>
+      <br>
+      <!--<ion-list style="padding-top: 10px!important;">
+        <div slot="content">
+          <div *ngFor="let label of serviceInformer" [class]="theme.hover">
+            <a *ngIf="label.openInNewTab" (click)="ishowinformer(label.link)"  auto-hide="false" [href]="label.link" target="_blank" routerLinkActive="selected">
+
+              <ion-item (click)="closeSubMenu(label.link)"  lines="none" >
+                <ion-icon class="list-icon" [class]="theme.hover" [ngClass]="isRouteActive(label.link) ? theme.colorActive : theme.colorPassive" aria-hidden="true" slot="start" [ios]="label.icon" [md]="label.icon"></ion-icon>
+                <ion-label [class]="theme.hover+' ion-text-wrap '"
+                           [ngClass]="isRouteActive(label.link) ? theme.colorActive : theme.colorPassive"
+                           style="font-size: 14px !important;"
+                >{{ label.label }}</ion-label>
+              </ion-item>
+            </a>
+            <a *ngIf="!label.openInNewTab" (click)="ishowinformer(label.link)"  auto-hide="false" [routerLink]="label.link"  routerLinkActive="selected">
+
+              <ion-item (click)="closeSubMenu(label.link)"  lines="none" >
+                <ion-icon class="list-icon" [class]="theme.hover" [ngClass]="isRouteActive(label.link) ? theme.colorActive : theme.colorPassive" aria-hidden="true" slot="start" [ios]="label.icon" [md]="label.icon"></ion-icon>
+                <ion-label [class]="theme.hover+' ion-text-wrap '"
+                           [ngClass]="isRouteActive(label.link) ? theme.colorActive : theme.colorPassive"
+                           style="font-size: 14px !important;"
+                >{{ label.label }}</ion-label>
+              </ion-item>
+            </a>
+          </div>
+
+        </div>
+
+      </ion-list>-->
+    </div>
+  </div>
+  <!--<div class="barre-1"></div>-->
+
+  <div  [class]="bgImage+' '+'layout-block-right'" >
+    <div class="containe-grand-title">
+      <h1 *ngIf="!titlePmu"  class="ion-text-center ion-padding ion-margin" [ngClass]="theme.welcomeText" style="font-weight: bolder">Bienvenue</h1>
+      <h1 *ngIf="titlePmu"  class="ion-text-center ion-padding ion-margin" [class]="theme.color+' pmu-bienvenu'" ><strong>PMU</strong> & Moi</h1>
+    </div>
+
+    <div [class]="'conatine-div-service '+width60" >
+        <ng-content select="[content]"></ng-content>
+    </div>
+  </div>
+  <!--<div class="barre-2"></div>-->
+</div>
+
+

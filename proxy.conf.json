@@ -1,0 +1,31 @@
+{
+  "*/maps/*": {
+    "target": "http://localhost:8100",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/api/*": {
+    "target": "http://localhost:8100",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/maps/api*": {
+    "target": "http://localhost:8100",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "**": {
+    "target": "https://api.openweathermap.org/data/2.5/weather",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "https://maps.googleapis.com/maps/api/place/autocomplete/*": {
+    "target": "https://maps.googleapis.com/maps/api/place/autocomplete/",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

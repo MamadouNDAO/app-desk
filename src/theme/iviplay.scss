@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'century gothic';  //This is what we are going to call
+  src: url('../assets/font/century-gothic.ttf');
+}
+
+ion-content, ion-card, ion-item, p, ion-input, span, div, button, ion-button{
+  font-family:'century gothic' !important;
+}
+

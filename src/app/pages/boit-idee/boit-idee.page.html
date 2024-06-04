@@ -1,0 +1,48 @@
+
+<div class=" svce">
+
+    <div class="svce-block svce-main">
+      <div class="principal" >
+        <ion-grid class="mytoolbar" >
+          <ion-row>
+            <ion-col class="mytoolbar-icon" size="1">
+              <!-- <a routerLink="/tabs/tab1">
+                <ion-icon class="icon" name="chevron-back-outline"></ion-icon>
+              </a> -->
+            </ion-col>
+            <ion-col class="colStart" size="10">
+
+              <ion-title class="ion-text-center mytoolbar-title title-app" > Boîte à idée </ion-title>
+            </ion-col>
+            <ion-col class="mytoolbar-icon" size="1" >
+
+              <!-- <ion-icon   class="icon1" name="notifications-outline"></ion-icon> -->
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div id="contenuService">
+
+          <ion-card class="ioncard">
+            <div class="inputCard">
+              <ion-input [(ngModel)]="inputValue" class="boiteAideeInput" placeholder="Saisir un titre" ></ion-input>
+              <textarea [(ngModel)]="desc" name="" id="" cols="30" rows="10" placeholder="Ajouter un constat…"></textarea>
+              <button  class="btn-app" > Valider </button>
+            </div>
+          </ion-card>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="svce-block svce-historique">
+      <!-- <ion-card class="svce-historique-search" > -->
+      <ion-searchbar class="hist-search-bar" value="" placeholder="recherchez" ></ion-searchbar>
+      <!-- </ion-card> -->
+      <ion-card class="svce-historique-content" >
+<!--        <ion-title style="margin-bottom: 1rem;" >Historique</ion-title>-->
+        <ion-skeleton-text [animated]="true" style="height: 100%"></ion-skeleton-text>
+
+      </ion-card>
+    </div>
+  </div>
+

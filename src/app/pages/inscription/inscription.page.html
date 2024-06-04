@@ -1,0 +1,35 @@
+
+
+<ion-content class="" [fullscreen]="true">
+  <div class="principal2  ivi-bg-image-white">
+      <div class="my-card-insc ivi-box-shadow">
+        <h4 class="ion-text-center century">Inscription</h4>
+        <form [formGroup]="formInscription">
+          <ion-input type="text" placeholder="Prénom" class="input-global century input-white" formControlName="firstname"  ></ion-input>
+          <ion-input type="text" placeholder="Nom" class="input-global century input-white"  formControlName="lastname"  ></ion-input>
+          <ion-input type="email" placeholder="Email" class="input-global century input-white" formControlName="email"   ></ion-input>
+          <div class="div-password">
+            <ion-input #pass type="password" placeholder="Mot de passe" class="input-global century input-white" formControlName="password"   ></ion-input>
+            <ion-icon (click)="showPassword(pass)" class="icon-pass" [name]="iconPass+'-outline'"></ion-icon>
+          </div>
+          <div class="div-btn">
+            <ion-button (click)="onSubmit()" class="btn-login century bg-white-gris"  >S'inscrire</ion-button>
+          </div>
+          <div class="no-compte">
+            <span class="century">Vous avez déjà un compte?</span>
+            <span class="century link-no-compte" (click)="goto('login')">Se connecter</span>
+          </div>
+        </form>
+        <br>
+      </div>
+  </div>
+  <div class="my-popup" *ngIf="isPopup">
+      <div class="content-popup">
+        <img [src]="'assets/icon/'+imgIcon+'.png'" alt="" srcset="">
+        <span>{{msgPopup}}</span>
+        <div (click)="closePopup(imgIcon)" class="popup-btn bg-white-gris">
+          OK
+        </div>
+      </div>
+  </div>
+</ion-content>

@@ -1,0 +1,251 @@
+<ion-content >
+  <div class="principal">
+    <!-- ==================== -->
+    <ion-grid *ngIf="showPricipalCard">
+      <ion-row>
+        <ion-col class="nav-col" size="1"routerLink="/tabs/tab1">
+            <ion-icon class="icon" name="chevron-back-outline"></ion-icon>
+        </ion-col>
+        <ion-col size="10" class="firstColumn" *ngIf="showPricipalCard" >
+          <span>Fitness</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="showFormCours" >
+      <ion-row>
+        <ion-col class="nav-col" size="1" (click)="backToPricipalPage()">
+            <ion-icon class="icon" name="chevron-back-outline"></ion-icon>
+        </ion-col>
+        <ion-col size="10" class="secondColumn" >
+          <span class="secondCardTitle" >Fitness</span><br>
+          <span>Cours</span>
+      </ion-col >
+
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="showFormActivity" >
+      <ion-row>
+        <ion-col class="nav-col" size="1" (click)="backToPricipalPage()">
+            <ion-icon class="icon" name="chevron-back-outline"></ion-icon>
+        </ion-col>
+        <ion-col size="10" class="secondColumn" >
+          <span class="secondCardTitleActivités" >Activités</span><br>
+      </ion-col >
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="showFormCotisation" >
+      <ion-row>
+        <ion-col class="nav-col" size="1" (click)="backToPricipalPage()">
+            <ion-icon class="icon" name="chevron-back-outline"></ion-icon>
+        </ion-col>
+        <ion-col size="10" class="secondColumn" >
+          <span>Abonnements</span>
+        </ion-col >
+      </ion-row>
+    </ion-grid>
+
+
+    <!--  -->
+    <ion-card class="card-M" *ngIf="showPricipalCard">
+      <ion-list  lines="none" >
+        <div class="">
+          <ion-item >
+            <ion-grid class="productGrid">
+              <ion-row  (click)="showFormPage(1)">
+                <!-- <ion-col class="buttonColumn1" size="12">
+                  <img src="assets/images/fitness.jpg" alt="">
+              </ion-col> -->
+                <ion-col class="iconBx" size="2" >
+                  <ion-icon  class="icon" name="book-outline"></ion-icon>
+                </ion-col>
+                <ion-col class="ion-padding">
+                 <span class="list-lab">Cours </span>
+                </ion-col>
+              </ion-row>
+              <div class="divider"></div>
+              <ion-row  (click)="showFormPage(2)">
+                <ion-col class="iconBx" size="2" >
+                  <ion-icon  class="icon" name="barbell-outline"></ion-icon>
+                </ion-col>
+                <ion-col class="ion-padding">
+                 <span class="list-lab">Activités</span>
+                </ion-col>
+              </ion-row >
+                <div class="divider"></div>
+              <ion-row (click)="showFormPage(3)">
+                <ion-col class="iconBx" size="2" >
+                  <ion-icon  class="icon" name="wallet-outline"></ion-icon>
+                </ion-col>
+                <ion-col class="ion-padding">
+                 <span class="list-lab">Abonnements</span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <!-- <ion-icon  class="icon" name="{{product.icon}}-outline"></ion-icon>
+            <ion-label>{{product.name}}</ion-label> -->
+          </ion-item>
+          <!-- <div class="divider"></div> -->
+        </div>
+      </ion-list>
+
+    </ion-card>
+
+    <ion-card  class="card-M" *ngIf="showFormCours" id="showFormCours">
+      <button class="favButton" [class.active]="favorisShow"(click)="showRecents()">Cours disponible</button>
+      <button class="favButton" [class.active]="favorisHide"(click)="showFavoris()" >Mes réservations</button>
+      <div [hidden]="favorisHide">
+        <ion-list lines="none">
+          <ion-item >
+            <div class=""></div>
+            <ion-label *ngFor="let day of currentNameWeek;">
+              <!-- (click)="changeToDay(day.day)" -->
+              <div  class="calendarBadge">
+                {{day.name.slice(0, 3)}}
+                <br>
+                <ion-badge *ngIf="day.day == this.today" color="medium" slot="end">{{day.day}}</ion-badge>
+                <ion-badge *ngIf="day.day != this.today" color="light" slot="end">{{day.day}}</ion-badge>
+              </div>
+            </ion-label>
+          </ion-item>
+
+          <div *ngFor="let cour of cours">
+            <ion-item (click)="reserveCours(cour)">
+              <ion-avatar slot="start">
+                <ion-icon class="barbell" name="barbell-outline"></ion-icon>
+              </ion-avatar>
+              <ion-label>
+                <p class="list-lab-text"> <strong>{{cour.name}}</strong> </p>
+                <p class="list-lab-text">{{cour.description}}</p>
+                <p class="list-lab-text">{{cour.hours}}</p>
+              </ion-label>
+            </ion-item>
+            <div class="divider"></div>
+
+          </div>
+        </ion-list>
+      </div>
+
+      <div [hidden]="favorisShow">
+        <ion-list lines="none" >
+          <div class="divider"></div>
+          <ion-item >
+            <ion-label *ngFor="let day of currentNameWeek;">
+              <!-- (click)="changeToDay(day.day)" -->
+              <div  class="calendarBadge">
+                {{day.name.slice(0, 3)}}
+                <br>
+                <ion-badge *ngIf="day.day == this.today" color="medium" slot="end">{{day.day}}</ion-badge>
+                <ion-badge *ngIf="day.day != this.today" color="light" slot="end">{{day.day}}</ion-badge>
+              </div>
+            </ion-label>
+          </ion-item>
+          <div  *ngFor="let cour of coursFavoris; let index = index;">
+            <ion-item  lines="none"(click)="cancelCours(cour, index)">
+              <ion-avatar slot="start">
+                <ion-icon class="barbell" name="barbell-outline"></ion-icon>
+              </ion-avatar>
+              <ion-label>
+                <p class="list-lab-text"> <strong>{{cour.name}}</strong> </p>
+                <p class="list-lab-text">{{cour.description}}</p>
+                <p class="list-lab-text">{{cour.hours}}</p>
+              </ion-label>
+            </ion-item>
+            <div class="divider"></div>
+          </div>
+          <div *ngIf="coursFavoris.length === 0">
+            <br>
+            <br>
+            <ion-label>
+              <h2 style="margin-left: 20px;">Aucun cours réserver</h2>
+            </ion-label>
+            <br>
+            <br>
+          </div>
+        </ion-list>
+      </div>
+    </ion-card>
+
+    <ion-card class="card-M" *ngIf="showFormActivity">
+      <ion-list lines="none">
+        <ion-item >
+          <ion-label *ngFor="let day of currentNameWeek;">
+            <!-- (click)="changeToDay(day.day)" -->
+            <div  class="calendarBadge">
+              {{day.name.slice(0, 3)}}
+              <br>
+              <ion-badge *ngIf="day.day == this.today" color="medium" slot="end">{{day.day}}</ion-badge>
+              <ion-badge *ngIf="day.day != this.today" color="light" slot="end">{{day.day}}</ion-badge>
+            </div>
+          </ion-label>
+        </ion-item>
+        <div  *ngFor="let cour of cours">
+          <ion-item  (click)="reserveCours(cour)">
+            <ion-avatar slot="start">
+              <ion-icon class="barbell" name="barbell-outline"></ion-icon>
+            </ion-avatar>
+            <ion-label>
+              <p class="list-lab-text"> <strong>{{cour.name}}</strong> </p>
+                <p class="list-lab-text">{{cour.description}}</p>
+                <p class="list-lab-text">{{cour.hours}}</p>
+            </ion-label>
+          </ion-item>
+          <div class="divider"></div>
+        </div>
+      </ion-list>
+    </ion-card>
+
+    <ion-card  class="card-M" *ngIf="showFormCotisation">
+      <ion-list>
+        <ion-item lines="none" *ngFor="let cotisation of cotisations">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="2" class="buttonColumn1">
+                  <ion-icon class="barbell" name="card-outline"></ion-icon>
+                </ion-col>
+                <ion-col size="7" >
+                  <p class="paragraphfAbonnement">{{cotisation.name}}</p>
+                  <p class="paragraphfAbonnement">{{cotisation.price}}€</p>
+                </ion-col>
+                <ion-col size="3" class="buttonColumn1" >
+                  <ion-button [disabled]="cotisation.buy" class="btn-app"  (click)="openBottomSheet(cotisation)" >{{cotisation.buy? 'Payé':'Payer'}}</ion-button>
+                </ion-col>
+              </ion-row>
+              <div class="divider"></div>
+            </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+
+
+
+
+
+
+    <div id="paymentBottomSheet" class="bottomSheet"  >
+      <ion-grid>
+          <ion-row>
+            <ion-col size="12"(click)="closeBottomSheet()" >
+                <div class="bottomSheetNameDiv">
+                    <p class="totalPriceSpanClass">Paiement électronique</p>
+                </div>
+            </ion-col>
+            <ion-col size="12" class="centerElement">
+              <img src="assets/images/altocard.jpeg">
+            </ion-col>
+          </ion-row>
+          <ion-row class="paymentRow">
+            <ion-col size="2" class="centerElement">
+              <ion-icon class="icon" name="wifi-outline"></ion-icon>
+            </ion-col>
+            <ion-col size="10" class="paragraphCenter">
+              <span class="paymentMessage">Veillez scanner l'interface de paiement</span>
+            </ion-col>
+            <ion-col  size="12" class="paymentColumn ion-text-center">
+              <button class="btn-app" (click)="payConfirmation()"  >Payer</button>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

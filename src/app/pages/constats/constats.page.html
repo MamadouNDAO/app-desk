@@ -1,0 +1,177 @@
+<app-layout-service>
+
+  <!-- <ion-searchbar [ngClass]="theme.searchbar" inputPlace placeholder="" ></ion-searchbar> -->
+
+
+  <div content>
+    <ion-card *ngIf="addView"   [class]="theme.colorServiceCard+' '+theme.scrollbar + ' mere-card ion-padding'"   >
+      <div >
+        <div class="top-icon-title">
+          <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Déclarer un incident</ion-label>
+          <div class="icon-right" headerIcon>
+            <!--<ion-icon (click)="openNotification()"  style="cursor: pointer"  [ngClass]="theme.color" name="notifications"></ion-icon>-->
+            <ion-icon style="cursor: pointer" class="newspaper-icon" (click)="goTo('historique')" [ngClass]="theme.color" name="newspaper"></ion-icon>
+            <!--<ion-icon class="ion-float-end icon ion-padding-horizontal" name="list-outline" (click)="switchAddView()"></ion-icon>
+            <ion-icon class="ion-float-end icon ion-padding-horizontal" name="add-outline" (click)="switchHistoryView()"></ion-icon>-->
+          </div>
+        </div>
+        <!--<ion-searchbar [ngClass]="theme.searchbar" [(ngModel)]="input" inputPlace placeholder="Rechercher" ></ion-searchbar>-->
+      </div>
+      <br>
+      <div [class]="'inputCard '" *ngIf="addView">
+      <div [class]="' const-img-bx'" >
+        <label  for="img-constat-input">
+          <ion-icon [class]="theme.color" *ngIf="!seletedImg" name="camera"></ion-icon>
+          <small *ngIf="!seletedImg">Ajouter une image</small>
+          <img *ngIf="seletedImg"  [src]="seletedImg" style="object-fit: contain;width:100% ; height:100% " alt="">
+        </label>
+      </div>
+      <div class="my-flex-list">
+        <div class="partie-1 param-section">
+          <ion-input #titreConst (input)="verifGrised(titreConst,descConst)" [(ngModel)]="titleConstat" [class]="theme.family" type="text" placeholder="Titre*"></ion-input>
+          <ion-select [class]="theme.family" [(ngModel)]="salleId" interface="popover" placeholder="Séléctionner une salle" [interfaceOptions]="{'cssClass': 'f-popover'}">
+            <ion-select-option [class]="theme.family"   *ngFor="let r of rooms" [value]="r.id">{{ r.name }} </ion-select-option>
+          </ion-select>
+          <ion-select  [class.hidden]="theme.color == 'ivi-red'" [class]="theme.family" [(ngModel)]="categorieId" interface="popover" placeholder="Séléctionner une catégorie" [interfaceOptions]="{'cssClass': 'f-popover'}">
+            <ion-select-option [class]="theme.family"   *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }} </ion-select-option>
+          </ion-select>
+        </div>
+        <textarea #descConst   [class]="theme.family+' '+hArea" [(ngModel)]="desc"  placeholder="Ajouter un constat…*"></textarea>
+      </div>
+
+
+      <input id="img-constat-input" name ="__img" type="file" (change)="displayFileName($event)" >
+      <ion-button   [class]="theme.bg+' '+theme.family+' '" (click)="actionToConstat()">
+        Valider
+        <ion-spinner *ngIf="isLoading" name="dots"></ion-spinner>
+      </ion-button>
+    </div>
+
+
+    </ion-card>
+    <ion-card *ngIf="historyView" [class]="theme.colorServiceCard+' '+theme.scrollbar + ' mere-card ion-padding'">
+      <div >
+        <div class="top-icon-title">
+          <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Historique des constats</ion-label>
+          <div class="icon-left" headerIcon>
+            <ion-icon style="cursor: pointer" (click)="returnPage()" [ngClass]="theme.color" name="arrow-back"></ion-icon>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="historyView">
+
+
+        <br>
+
+        <ion-list *ngIf="historiques" detail [class]="theme.family+' f-history scroller '+theme.scrollbar">
+          <div *ngFor="let historique of historiques | search: input ">
+            <ion-item >
+              <ion-icon [class]="theme.color"  name="megaphone-outline" slot="start"></ion-icon>
+              <ion-label [class]="theme.family">
+                <h3 class="list-lab" > {{historique.label}} </h3>
+                <p class="list-lab"> {{historique.created_at}}</p>
+                <p class="list-lab"> {{historique.status}} </p>
+              </ion-label>
+            </ion-item>
+            <br>
+          </div>
+        </ion-list>
+
+        <ion-list *ngIf="!historiques.length" >
+          <ion-list-header>
+            <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+          </ion-list-header>
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+      </div>
+    </ion-card>
+    <ion-card *ngIf="showNotif" mode="ios" id="contenuService" [class]="theme.colorServiceCard+' '+ ' mere-card ion-padding'"   >
+      <div >
+        <div class="top-icon-title">
+          <div class="icon-left" headerIcon>
+            <ion-icon style="cursor: pointer" (click)="closeNotification()" [ngClass]="theme.color" name="arrow-back"></ion-icon>
+          </div>
+          <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Notification</ion-label>
+          <div class="icon-right" headerIcon>
+            <!--<ion-icon style="cursor: pointer"   [ngClass]="theme.color" name="add"></ion-icon>
+            <ion-icon [class.griser]="true" style="cursor: pointer" class="newspaper-icon"  [ngClass]="theme.color" name="notifications"></ion-icon>-->
+          </div>
+        </div>
+      </div>
+
+      <div [class]="theme.scrollbar+' scroller'" style="height: 85% !important;">
+        <div [class]="theme.family+' card-enquete ion-padding'" *ngIf="isNotif">
+          <span>Vous avez reçu une enquête de satisfaction pour votre constat <br> <strong [class]="theme.color">Bienvenue-20230808-132040</strong></span>
+          <span>{{message}}</span>
+          <br>
+          <hr [class]="theme.color+'-hr'">
+          <div class="date-constat">
+            <ion-icon [class]="theme.color" name="time-sharp"></ion-icon>
+            <span>Mar 08 juil à 13h20</span>
+          </div>
+          <button [class]="theme.bg" (click)="showEnquete()">Accéder à l'enquête</button>
+        </div>
+        <div class="card-principal" *ngIf="isEnquete">
+          <div [class]="theme.family+' card-enquete-2 ion-padding'">
+            <div [class]="theme.color+'-brd-bottom item-qst'">
+              <span>Conformité aux attentes</span>
+              <div class="start-note" >
+                <ion-icon (click)="selectNote(ind, qst1)" *ngFor="let i of qst1; let ind = index" [class]="theme.color" [name]="i.name"></ion-icon>
+              </div>
+            </div>
+            <div [class]="theme.color+'-brd-bottom item-qst'">
+              <span>Rapidité d'exécution</span>
+              <div class="start-note" >
+                <ion-icon (click)="selectNote(ind, qst2)" *ngFor="let i of qst2; let ind = index" [class]="theme.color" [name]="i.name"></ion-icon>
+              </div>
+            </div>
+            <div [class]="theme.color+'-brd-bottom item-qst'">
+              <span>Qualité de service</span>
+              <div class="start-note" >
+                <ion-icon (click)="selectNote(ind, qst3)" *ngFor="let i of qst3; let ind = index" [class]="theme.color" [name]="i.name"></ion-icon>
+              </div>
+            </div>
+            <div [class]="theme.color+'-brd-bottom item-qst'">
+              <span>Qualité d'écoutes</span>
+              <div class="start-note" >
+                <ion-icon (click)="selectNote(ind, qst4)" *ngFor="let i of qst4; let ind = index" [class]="theme.color" [name]="i.name"></ion-icon>
+              </div>
+            </div>
+          </div>
+          <textarea [class]="theme.family" placeholder="Votre commentaire"></textarea>
+        </div>
+        <div class="divbtn" *ngIf="isEnquete">
+          <button (click)="showEnquete()" [class]="theme.bg">Valider</button>
+          <button (click)="showEnquete()">Annuler</button>
+        </div>
+      </div>
+    </ion-card>
+  </div>
+
+
+</app-layout-service>
+
+<div class="my-popup" *ngIf="isPopup">
+  <div class="content-popup animate__animated animate__backInUp">
+    <span [class]="theme.family+' '+theme.color">{{msgPopup}}</span>
+    <ion-button (click)="closePopup()" [class]="theme.family+' '+theme.bg">OK</ion-button>
+  </div>
+</div>

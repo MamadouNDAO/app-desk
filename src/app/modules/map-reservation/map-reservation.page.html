@@ -1,0 +1,45 @@
+<app-layout-service >
+
+
+
+  <div content style="height: 85vh;">
+    <ion-card mode="ios" id="contenuService"
+              [class]="theme.colorServiceCard+' mere-card ' + ' ion-padding'">
+      <div>
+        <div class="top-icon-title">
+          <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Se
+            repérer</ion-label>
+          <div class="icon-right" headerIcon>
+            <!--<ion-icon style="cursor: pointer" (click)="goTo('notifications')" [ngClass]="theme.color"
+              name="notifications"></ion-icon>
+            <ion-icon style="cursor: pointer" class="newspaper-icon" (click)="goTo('historique')"
+              [ngClass]="theme.color" name="newspaper"></ion-icon>-->
+            <!--<ion-icon class="ion-float-end icon ion-padding-horizontal" name="list-outline" (click)="switchAddView()"></ion-icon>
+            <ion-icon class="ion-float-end icon ion-padding-horizontal" name="add-outline" (click)="switchHistoryView()"></ion-icon>-->
+          </div>
+        </div>
+
+      </div>
+      <div style="height: 100%">
+        <iframe (load)="onIframeLoad()" src="assets/mapviewer/js/mapviewr-reservation.html" frameborder="0" allowfullscreen width="100%"
+                style="min-height: 100%; --max-height: 100%; padding-bottom: 35px" http-equiv="Content-Security-Policy"
+                content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline'">
+        </iframe>
+      </div>
+    </ion-card>
+  </div>
+
+</app-layout-service>
+
+<!--  <iframe src="assets/mapviewer/mapviewer.html"-->
+<!--  frameborder="0" allowfullscreen-->
+<!--  height="100%"-->
+<!--  http-equiv="Content-Security-Policy"-->
+<!--  content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline'"-->
+<!--&gt;-->
+<!--</iframe>-->
+<!--<div id="container">
+
+</div>-->
+
+

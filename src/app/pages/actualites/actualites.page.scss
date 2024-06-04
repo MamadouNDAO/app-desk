@@ -1,0 +1,159 @@
+@use '../../../theme/variables.scss' as v;
+
+.principal{
+    background-color:  v.$secondary;
+    height: 100%;
+}/*
+ion-card{
+    padding-top: 16px;
+    border-radius: 25px;
+    height: 85%;
+}*/
+.icon{
+    color: v.$primary;
+    font-size: 35px;
+}
+.title1{
+    color: v.$primary;
+    font-size: 20px;
+}
+// .colStart{
+//     margin-top: 2%;
+//     margin-left: 5%;
+// }
+.colStart1{
+    border-bottom: 1px solid v.$secondary;
+    text-align: center;
+}
+.colIcon{
+    margin-top: 3%;
+}
+.locIcon{
+    color:v.$primary;
+    font-size: 30px;
+    margin-top: 15%;
+}
+.pName{
+    margin-top: 1%;
+}
+.p1{
+    font-size: 20px;
+    color: v.$primary;
+}
+.p2{
+    font-size: 20px;
+}
+.title{
+    font-size: 12px;
+    color: black;
+}
+.link{
+text-decoration: none;
+}
+// img{
+//     height:60% ;
+//     width: 100%;
+//     margin-top: 30%;
+// }
+
+.card-item{
+  width:99%;
+  margin-bottom: 15px;
+  height: auto;
+  margin-right: 10px !important;
+}
+
+.width60{
+  width: 60% !important;
+}
+
+.width70{
+  width: 70% !important;
+}
+
+img{
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  margin-top: 0px;
+}
+
+.true{
+  color: #eb445a;
+}
+
+.curs-point{
+  cursor: pointer;
+}
+
+.icon-title{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  color: var(--ion-green);
+  ion-icon{
+    //color: var(--ion-green)
+  }
+}
+
+.icon-like{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px;
+  color: var(--ion-green);
+  .icon-like1{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
+}
+
+.info-content{
+  padding: 10px;
+  font-size: 15px;
+  color: var(--ion-green);
+  margin-top: -27px;
+}
+
+ul {
+  padding: 0;
+  margin-left: 13px;
+  li{
+    margin-bottom: 10px;
+    //display: flex;
+   // flex-direction: row;
+    align-items: center;
+    //justify-content: space-between;
+    flex-wrap: wrap;
+    strong{
+      margin-left: 10px;
+    }
+    ion-icon{
+      position: relative;
+      float: right;
+      font-size: 13px;
+    }
+  }
+  span{
+    margin-left: -15px;
+  }
+}
+
+.border-red{
+  border: solid 1px var(--ion-red);
+}
+
+.border-green{
+  border: solid 1px var(--ion-green);
+}
+
+.loader-fav{
+
+}

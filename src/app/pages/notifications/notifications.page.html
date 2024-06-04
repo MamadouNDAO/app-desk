@@ -1,0 +1,40 @@
+
+
+<ion-content [fullscreen]="true" >
+
+  <div [ngClass]="theme.backgroundImage+' '+theme.family+ ' mycontainer'" >
+    <div class="back" (click)="goBack()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      <ion-label>Retour</ion-label>
+    </div>
+
+    <div class="oncontaine">
+      <ion-card class="first-card"  style="height: 90px;">
+        <ion-label  class="ion-text-center header-title" [ngClass]="theme.title">Notifications</ion-label>
+      </ion-card>
+
+      <ion-card class="scnd-card" [class]="theme.scrollbar + ' ion-padding'">
+        <ion-list>
+          <ion-item lines="none">
+            <ion-label style="font-size: 12px" [class]="theme.family" >Votre constat a bien été reçu et il est en cours de traitement.</ion-label>
+            <ion-icon name="time-outline" slot="end"></ion-icon>
+              <small style="font-style: italic">il y a  30 min </small>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label style="font-size: 12px" [class]="theme.family" >Votre réservation est maintenant disponible.</ion-label>
+            <ion-icon name="time-outline" slot="end"></ion-icon>
+            <small style="font-style: italic">il y a  2h </small>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label style="font-size: 12px" [class]="theme.family" >Votre constat a bien été reçu et il est en cours de traitement.</ion-label>
+            <ion-icon name="time-outline" slot="end"></ion-icon>
+            <small style="font-style: italic">il y a  2 jours </small>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+    </div>
+
+  </div>
+</ion-content>

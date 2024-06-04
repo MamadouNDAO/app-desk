@@ -1,0 +1,176 @@
+<app-layout-service [showMenu]="showMenu" [showSubMenu]="false" [showCard2]="false" [bgCard]="bgPmu">
+
+
+
+
+
+  <div  content  id="contenuService" [class]="theme.colorServiceCard+' mere-card '+ ' ion-padding '+widthVal">
+
+
+    <div >
+      <div class="top-icon-title">
+        <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Fil d'actualités</ion-label>
+        <div class="icon-right" headerIcon>
+          <!--<ion-icon style="cursor: pointer" (click)="goTo('notifications')" [ngClass]="theme.color" name="notifications"></ion-icon>
+          <ion-icon style="cursor: pointer" class="newspaper-icon"  [ngClass]="theme.color" name="newspaper"></ion-icon>-->
+          <ion-spinner *ngIf="isLoadFav" [class]="theme.color+' loader-fav'"  name="lines"></ion-spinner>
+        </div>
+        <br>
+        <ion-segment #ionseg value="recent" mode="md" (ionChange)="segmentChange(ionseg)">
+          <ion-segment-button value="recent">
+            <ion-label>Récents</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="favori">
+            <ion-label>Favoris</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+    </div>
+    <div [class]="theme.scrollbar+' scroller'" *ngIf="!favorisShow">
+      <ion-card  [class]="theme.colorServiceCard+' '+theme.borderItem+' bx-1 mere-card card-item'" *ngFor="let item of actu;let index = index" >
+        <div [class]="theme.color +' '+ theme.family+' icon-title'">
+          <!--<ion-icon [name]="'globe-outline'"></ion-icon>-->
+          <img style="width: 40px; height: 40px" [src]="item.profile.image" alt="" srcset="">
+          <span><strong>{{item.name}}</strong></span>
+        </div>
+        <img src="{{ item.pictures.length > 0 ? item.pictures[0].image : 'assets/images/sci/default-post.jpeg' }}" alt="">
+        <div [class]="theme.color+' icon-like'">
+          <div class="icon-like1">
+            <ion-icon (click)="like(item)" [class]="' curs-point'" name="heart"></ion-icon>
+            <ion-icon (click)="presentAlertMultipleButtons(item)" [class]=" ' curs-point'" name="chatbubble"></ion-icon>
+
+            <ion-icon (click)="shareAction()" class="curs-point" name="share-social-sharp"></ion-icon>
+          </div>
+
+          <ion-icon [class]="' curs-point'" (click)="addToFavori(item.id)" [name]="Object2.values(item.favorites).includes(userID) ? 'bookmark' : 'bookmark-outline'"></ion-icon>
+        </div>
+        <div [class]="theme.color +' '+ theme.family+' info-content'">
+          <p [innerHTML]="item.desc"></p>
+
+        </div>
+
+      </ion-card>
+      <div>
+        <ion-list *ngIf="loading && !isLoadFav">
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngIf="loading && !isLoadFav">
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+
+        </ion-list>
+      </div>
+      <br><br><br>
+    </div>
+
+    <div [class]="theme.scrollbar+' scroller'" *ngIf="favorisShow">
+      <ng-container *ngFor="let item of actu;let index = index">
+        <ion-card  [class]="theme.colorServiceCard+' '+theme.borderItem+' bx-1 mere-card card-item'"  *ngIf="Object.values(item.favorites).includes(userID)">
+          <div [class]="theme.color +' '+ theme.family+' icon-title'">
+            <img style="width: 40px; height: 40px" [src]="item.profile.image" alt="" srcset="">
+            <span><strong>{{item.name}}</strong></span>
+          </div>
+          <img src="{{ item.pictures.length > 0 ? item.pictures[0].image : 'assets/images/sci/default-post.jpeg' }}" alt="">
+          <div [class]="theme.color+' icon-like'">
+            <div class="icon-like1">
+              <ion-icon (click)="like(item)" [class]="' curs-point'" name="heart-sharp"></ion-icon>
+              <ion-icon (click)="presentAlertMultipleButtons(item)" [class]=" ' curs-point'" name="chatbubble-sharp"></ion-icon>
+              <ion-icon (click)="shareAction()" class="curs-point" name="share-social-sharp"></ion-icon>
+            </div>
+            <ion-icon [class]="' curs-point'" (click)="addToFavori(item.id)" name="bookmark-sharp"></ion-icon>
+          </div>
+          <div [class]="theme.color +' '+ theme.family+' info-content'">
+            <p [innerHTML]="item.desc"></p>
+
+
+          </div>
+
+        </ion-card>
+      </ng-container>
+
+      <br><br><br>
+    </div>
+
+  </div>
+
+</app-layout-service>
+
+
+

@@ -1,0 +1,324 @@
+//@use './../../../theme/variables.scss' as v;
+.container-layout{
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  width: 100% !important;
+
+  .layout-block-right{
+    width: 100%;
+    min-height: 100vh;
+    .conatine-div-service{
+      width: 75%;
+      margin: auto;
+      height: 75vh;
+      overflow: hidden;
+
+    }
+
+    .w60{
+      width: 60% !important;
+    }
+    .containe-grand-title{
+      width: 100%;
+      height: 10vh;
+    }
+  }
+}
+
+.principal{
+  background-color:  var(--blanc);
+  height: 100%;
+  overflow-y: scroll;
+}
+// ion-content{
+//     background-color:  var(--secondary);
+// }
+ion-card{
+  border-radius: 25px;
+}
+.colStart{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon,.icon1{
+  color: var(--primary);
+  font-size: 2rem;
+  cursor: pointer;
+}
+span{
+  font-size: 20px;
+  color: var(--primary);
+}
+
+.icon2{
+  color:  var(--primary);
+  font-size: 25px;
+}
+.col1{
+  border-bottom: var(--secondary) 1px solid;
+}
+
+.weather-icon{
+  color:  var(--primary);
+  font-size: 95px;
+}
+
+.bottomSHeet{
+  position: fixed;
+  width: 600px;
+  bottom: 0;
+  border-radius: 20px 20px 0px 0px;
+  z-index: 20;
+  background-color: var(--ion-color-medium-contrast);
+  transform: translate3d(0,0,0);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+ion-input{
+  width: 100%;
+  padding: 5px;
+  border-radius: 10px;
+  text-align: center;
+}
+ion-button{
+  // width: 100%;
+  height: 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  background-color: #514e4c;
+  color: white;
+  margin-top: 0.5rem ;
+}
+.span-tem{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.colStart.date-info{
+  padding-left: 2.5rem;
+
+}
+
+.span-tem p{
+
+}
+.titleBottomSheet{
+  height: 40%;
+  border-bottom: 1px solid var(--secondary);
+}
+
+.header-icons{
+  display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+.list-icon{
+  margin-left: .1rem;
+  margin-right: 1.2rem !important;
+}
+
+.informer-side{
+  width: 30%;
+    height: 100%;
+    background: #f7f6f6;
+    position: absolute;
+    top: 7.8%;
+    left: 0;
+}
+
+.pmu-bienvenu{
+  font-size: 24px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+  font-weight: 100;
+  strong{
+    font-weight: 400;
+  }
+}
+
+
+.sci-fond-md-service{
+  background-blend-mode: inherit;
+  background: url('../../../assets/images/sci/desk-sci-blanc.jpg') no-repeat center;
+  background-size: cover;
+}
+.sci-fond-md{
+  background-blend-mode: inherit;
+  background: url('../../../assets/images/sci/desk-sci-red.jpg') no-repeat center;
+  background-size: cover;
+}
+
+.pmu-fond-green{
+  background-blend-mode: inherit;
+  background: url('../../../assets/images/sci/desk-pmu-vert.jpg') no-repeat center;
+  background-size: cover;
+}
+
+.pmu-fond-blanc{
+
+  background: url("../../../assets/images/sci/desk-pmu.jpg") no-repeat center;
+  background-size: cover;
+}
+
+
+.card-bg-conten{
+  background: rgb(233, 222, 218);
+}
+
+
+
+
+.mere-card{
+  background: #eb445a;
+}
+
+ion-split-pane {
+  --side-width: 75px !important;
+  --side-max-width: 75px;
+  //--side-width: 300px !important;
+  //--side-max-width: 300px;
+  //--border: 1px solid #000;
+
+}
+
+
+ion-note {
+  display: inline-block;
+  font-size: 16px;
+
+  color: var(--ion-color-medium-shade);
+}
+
+ion-item.selected {
+  --color: var(--ion-color-primary);
+}
+
+
+.logo-bx{
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+.menu-infos{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.inbox-list{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  //height: 20%;
+}
+
+.inbox-list a,.bottom-info a{
+  font-size: 24px;
+  color: #514e4c;
+
+
+}
+
+.bottom-info{
+  justify-content: space-evenly;
+
+}
+
+#background-content{
+  background-color: rgb(243, 243, 243);
+
+}
+
+.hideMenu{
+  display: none !important;
+}
+
+.logout{
+  font-size: 13px;
+  cursor: pointer;
+  transition: color .5s ease-in;
+}
+.logout:hover{
+  color: red;
+}
+
+ion-modal{
+  --border-radius: 20px;
+  margin-left: 325px;
+}
+
+#main{
+  width: 100%;
+}
+
+.hidden{
+  display: none !important;
+  //color: red !important;
+}
+
+
+.container-split{
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  border-right: solid 1px #fff;
+  background: #fff !important;
+  .my-spit-plane{
+    width: 80px;
+    /*position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;*/
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    .menu-top-split, .menu-bottom-split{
+      width: 100%;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+      justify-content: flex-start;
+    }
+
+    .menu-bottom-split{
+    margin-bottom: 0 !important;
+      justify-content: center;
+
+  }
+  }
+
+  .menu-side{
+    box-shadow: 5px 0 5px -2px #8888884a;
+    width: 225px;
+    height: 100%;
+    position: relative;
+    left: 0;
+    z-index: 100;
+    overflow: hidden;
+
+    .ionlistscroll{
+      overflow: auto;
+      height: 100vh;
+    }
+  }
+}
+
+
+.my-cursor{
+  cursor: pointer !important;
+}
+

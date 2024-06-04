@@ -1,0 +1,37 @@
+
+
+
+<div
+
+[class]="'principal2 '+bgImage"
+
+
+ >
+
+  <ion-card [class]="theme.borderWhite+' card2'">
+    <h4 class="ion-text-center century">Connexion</h4>
+    <ion-input type="text" placeholder=" Email" [class]="'input-global century ' +theme.colorInput" [(ngModel)]="email" name="email" ></ion-input>
+    <ion-input [hidden]="isSSO" type="password" placeholder="  Mot de passe" [(ngModel)]="password" name="plainPassword"  [class]="'input-global century ' +theme.colorInput"></ion-input>
+    <div class="div-btn">
+      <ion-button [class]="'btn-login century '+theme.bg"  (click)="login()">Se connecter</ion-button>
+    </div>
+
+    <!--      [disabled]="email.length < 4 || password != newPass ">ENVOYER</ion-button>-->
+    <div class="no-compte">
+      <span class="century">OU</span>
+      <div class="div-btn">
+        <ion-button [class]="'btn-login century '+theme.bg"  (click)="goto('inscription')">S'inscrire</ion-button>
+      </div>
+    </div>
+  </ion-card>
+
+</div>
+<div class="my-popup" *ngIf="isPopup">
+  <div class="content-popup">
+    <img [src]="'assets/icon/'+imgIcon+'.png'" alt="" srcset="">
+    <span>{{msgPopup}}</span>
+    <div (click)="closePopup(imgIcon)" class="popup-btn bg-white-gris">
+      OK
+    </div>
+  </div>
+</div>

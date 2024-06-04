@@ -1,0 +1,119 @@
+@use './../../../theme/variables.scss' as v;
+
+.principal{
+    background-color:  v.$blanc;
+    height: 100%;
+}
+ion-card{
+    border-radius: 25px;
+    max-height: 25rem;
+    padding: 1rem;
+}
+.historiqueColumn{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+span{
+    font-size: 20px;
+    color: v.$primary;
+}
+.col1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.inputCard{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+}
+.title{
+    text-align: center;
+    font-size: 14px;
+}
+.span{
+    color: var(--ion-color-dark);
+    font-size: 14px;
+}
+.icon,.iconHistorique{
+    font-size: 35px;
+}
+ion-input,textarea{
+    background-color:  v.$secondary;
+    border-radius: 15px;
+    width: 90%;
+    margin-top: 0.5rem;
+}
+
+.info-salle{
+  box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+  height: 130px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ion-input{
+    --padding-start: 20px;
+    --ion-font-size:19px;
+    --placeholder-color:#000;
+
+}
+textarea::-webkit-input-placeholder {
+    padding-left: 13px;
+ }
+
+ textarea::-moz-input-placeholder {
+    padding-left: 13px;
+ }
+
+ textarea:-moz-input-placeholder {
+    padding-left: 13px;
+ }
+
+ textarea:-ms-input-placeholder {
+    padding-left: 13px;
+ }
+.native-input .sc-ion-input-ios {
+    font-size: 20px;
+}
+textarea{
+    border: 1px solid v.$secondary ;
+    padding: 2%;
+}
+button{
+    // width: 50%;
+    // height: 30px;
+    // border-radius: 25px;
+    // font-size: 16px;
+    // background-color: v.$primary;
+    // color: v.$blanc;
+    margin-top: 0.5rem;
+}
+.historicalCard{
+    overflow-y: scroll;
+    border-radius: 25px;
+    padding: 0rem;
+    width: 100%;
+}
+.historicalicon{
+    color: v.$primary;
+    font-size: 35px;
+}
+
+.constatTitle{
+    font-size: 15px;
+    font-weight: bolder;
+}
+.constatIcon{
+    color: v.$primary;
+    font-size: 33px;
+}
+
+// =====
+ion-label{
+  margin: 4px 8px;
+}

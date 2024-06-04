@@ -1,0 +1,104 @@
+@use '../../../theme//variables.scss' as v;
+
+.principal{
+    background-color:  v.$secondary;
+    height: 100%;
+}
+.ioncard{
+    border-radius: 25px;
+    padding: 0.5rem;
+    max-height: 16.5rem;
+}
+.icon{
+    color: v.$primary;
+    font-size: 35px;
+}
+.disabled{
+    opacity: 0.5;
+}
+.icon2{
+    color: v.$primary;
+    font-size: 35px;
+}
+.colTitreLeft{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.colTitre{
+    display: flex;
+    //justify-content: center;
+    align-items: center;
+}
+.columnIcon{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.columnToggle{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+// .Danger{
+//     color:  v.$primary;
+//     font-size: 35px;
+// }
+
+span{
+    font-size: 20px;
+    color: v.$primary;
+}
+
+.span{
+    font-size: 14px;
+    color: var(--ion-color-dark);
+}
+ion-toggle {
+    --background: var( --ion-color-light);
+    --background-checked:  var( --color-tabs);
+    --handle-background: var(--ion-color-medium-contrast);
+    --handle-background-checked:var(--ion-color-medium-contrast);
+  }
+ion-range{
+    --knob-background: var( --color-tabs);
+    --bar-background: var( --ion-color-light);
+    --bar-background-active:  var( --color-tabs);
+}
+
+.simulationButton{
+    display: flex;
+    align-items: center;
+    height: 100px;
+    flex-direction: column;
+}
+// button{
+//     width: 50%;
+//     height: 50%;
+//     border-radius: 25px;
+//     font-size: 16px;
+//     //background-color: v.$primary;
+//     color: v.$blanc;
+// }
+.fallDetectionDate{
+    color: v.$primary;
+    font-size:14px;
+}
+.fallDetectionSpan{
+  color: v.$primary;
+  font-size: 14px;
+}
+.chuteColumn{
+    display: flex;
+    flex-direction: column;
+}
+.chuteContent{
+    padding: 0;
+    max-height: 35%;
+    overflow-y: scroll;
+}
+// .iconHistorique{
+//     color: v.$primary;
+//     font-size: 25px;
+// }

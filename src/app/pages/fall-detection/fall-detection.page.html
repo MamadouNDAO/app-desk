@@ -1,0 +1,124 @@
+<div class=" svce" >
+
+    <div class="svce-block svce-main">
+      <div class="principal" id="principal">
+        <ion-grid class="mytoolbar" >
+          <ion-row>
+            <ion-col class="mytoolbar-icon" size="1">
+              <!-- <a routerLink="/tabs/tab1">
+                <ion-icon class="icon" name="chevron-back-outline"></ion-icon>
+              </a> -->
+            </ion-col>
+            <ion-col class="colStart" size="10">
+
+              <ion-title class="ion-text-center mytoolbar-title title-app" > Dispositif d’alarme du travailleur isolé </ion-title>
+            </ion-col>
+            <ion-col class="mytoolbar-icon" size="1" >
+
+              <!-- <ion-icon   class="icon1" name="notifications-outline"></ion-icon> -->
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div id="contenuService">
+
+          <ion-card class="ioncard">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="1" class="columnIcon">
+                  <ion-icon
+                  class="unify-icon"
+                  [ngStyle]="{'color': choosenColor$ === 'iviflo.com' ? 'var(--ion-primarysecond)' : 'var(--ion-primary)' }"
+                  name="megaphone-outline" ></ion-icon>
+                </ion-col>
+                <ion-col size="8" class="colTitreLeft">
+                <span class="list-lab"> Mode Dati {{datiModeStatus}}</span>
+                </ion-col>
+                <ion-col size="3" class="columnToggle">
+                  <ion-toggle (ionChange)="toggleToTrue($event)" aria-checked="true"></ion-toggle>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="1" class="columnIcon">
+                  <ion-icon
+                  [ngStyle]="{'color': choosenColor$ === 'iviflo.com' ? 'var(--ion-primarysecond)' : 'var(--ion-primary)' }"
+                  name="information-circle-outline" class="unify-icon"></ion-icon>
+                </ion-col>
+                <ion-col size="8" class="colTitreLeft">
+                <span   class="list-lab"> Notification</span>
+                </ion-col>
+                <ion-col size="3" class="columnToggle">
+                  <ion-toggle (ionChange)="sendNotification($event)" aria-checked="true"></ion-toggle>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="1" class="columnIcon">
+                  <ion-icon
+                  [ngStyle]="{'color': choosenColor$ === 'iviflo.com' ? 'var(--ion-primarysecond)' : 'var(--ion-primary)' }"
+                  name="information-circle-outline" class="unify-icon"></ion-icon>
+                </ion-col>
+                <ion-col class="colTitreLeft" size="4" >
+                <span  class="list-lab">Seuil(G)</span>
+                </ion-col>
+                <ion-col size="3" class="rangecol" class="columnToggle">
+                  <ion-range step="0.5" [min]="1.0" [max]="6.0" (ionChange)="onChange($event)" class="range"></ion-range>
+                </ion-col>
+                <ion-col size="3" class="range" class="columnToggle">
+                  <p><strong>{{value}}</strong> </p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <div class="simulationButton ">
+              <button (click)="sumulationAlert()"
+               [disabled]="!isDatiModeChecked"
+               class="btn-app"
+              [class.disabled]="!isDatiModeChecked"
+              [ngStyle]="{'background': choosenColor$ === 'iviflo.com' ? 'var(--ion-primarysecond)' : 'var(--ion-primary)' }"
+              >
+                Simuler une chute
+              </button>
+
+            </div>
+          </ion-card>
+
+      </div>
+
+      </div>
+
+    </div>
+    <div class="svce-block svce-historique">
+        <ion-searchbar class="hist-search-bar" value="" placeholder="recherchez" ></ion-searchbar>
+       <ion-card has-bouncing="true" class="svce-historique-content" >
+        <ion-title class="title-app" style="margin-bottom: 1rem;" >Historique</ion-title>
+          <ion-list lines="none" *ngFor="let chute of allFallDetections">
+            <ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="3" class="colTitre">
+                    <ion-icon
+                  [ngStyle]="{'color': choosenColor$ === 'iviflo.com' ? 'var(--ion-primarysecond)' : 'var(--ion-primary)' }"
+                    class="unify-icon" name="medkit-outline"></ion-icon>
+                  </ion-col>
+                  <ion-col size="9" class="chuteColumn">
+                    <span
+                  [ngStyle]="{'color': choosenColor$ === 'iviflo.com' ? 'var(--ion-primarysecond)' : 'var(--ion-primary)' }"
+
+                    class="fallDetectionSpan">Chute : {{chute.title}}</span>
+                    <span
+                  [ngStyle]="{'color': choosenColor$ === 'iviflo.com' ? 'var(--ion-primarysecond)' : 'var(--ion-primary)' }"
+
+                    class="fallDetectionDate">date : {{chute.date | date:'d/MM/YYYY HH:mm '}}</span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+            <div class="divider"></div>
+          </ion-list>
+
+       </ion-card>
+    </div>
+  </div>

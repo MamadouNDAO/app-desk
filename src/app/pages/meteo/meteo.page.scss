@@ -1,0 +1,130 @@
+//@use './../../../theme/variables.scss' as v;
+
+
+.principal{
+  background-color:  var(--blanc);
+  height: 100%;
+  overflow-y: scroll;
+}
+// ion-content{
+//     background-color:  var(--secondary);
+// }
+ion-card{
+  border-radius: 25px;
+}
+.colStart{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon,.icon1{
+  color: var(--primary);
+  font-size: 2rem;
+  cursor: pointer;
+}
+span{
+  font-size: 20px;
+  color: var(--primary);
+}
+
+.icon2{
+  color:  var(--primary);
+  font-size: 25px;
+}
+.col1{
+  border-bottom: var(--secondary) 1px solid;
+}
+
+.weather-icon{
+  color:  var(--primary);
+  font-size: 110px;
+}
+
+.bottomSHeet{
+  position: fixed;
+  width: 600px;
+  bottom: 0;
+  border-radius: 20px 20px 0px 0px;
+  z-index: 20;
+  background-color: var(--ion-color-medium-contrast);
+  transform: translate3d(0,0,0);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+ion-input{
+  width: 100%;
+  padding: 5px;
+  border-radius: 10px;
+  text-align: center;
+}
+ion-button{
+// width: 100%;
+height: 30px;
+border-radius: 25px;
+font-size: 16px;
+background-color: #514e4c;
+color: white;
+margin-top: 0.5rem ;
+}
+.span-tem{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.colStart.date-info{
+padding-left: 2.5rem;
+
+}
+
+.span-tem p{
+
+}
+.titleBottomSheet{
+  height: 40%;
+  border-bottom: 1px solid var(--secondary);
+}
+.cityName{
+  // font-size: 100%;
+  color: black;
+}
+.statistique{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  height: 5rem;
+}
+
+.autoCompletepredictions{
+position: absolute;
+z-index: 9999;
+top: 30%;
+left: 46%;
+ min-width: 300px;
+transform: translate(-50%, 40%);
+
+}
+
+.mytoolbar-icon ion-icon{
+  font-size: 2rem !important;
+}
+
+.statistique-m{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  align-items: center;
+}
+.celcus-numb{
+  font-size: 30px;
+  color: black;
+}
+
+.celcus{
+  position: absolute;
+    top: 2.5rem;
+    font-size: 18px;
+}
+

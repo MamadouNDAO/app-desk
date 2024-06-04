@@ -1,0 +1,261 @@
+ion-item{
+
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  cursor: pointer;
+  width: 97%;
+  transition: ease-in 300ms;
+}
+ion-item:hover{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.content-room{
+  width: 100%;
+  //border: solid 1px red;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+
+  .row-room{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .ivi-flex-row{
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      ion-icon{
+      }
+    }
+    .room-name{
+      width: 300px;
+    }
+
+    .see-map{
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+
+  }
+
+  .state{
+    align-items: flex-end;
+  }
+}
+
+.my-popup{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgb(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  .for-date{
+    width: 360px;
+    min-height: 280px;
+    background: #fff;
+  }
+  .content-popup{
+    margin-left: 300px;
+    width: 400px;
+    height: 500px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: all 0.5s ease;
+
+    .content-chip{
+      width: 100%;
+      height: 120px;
+      border-radius: 10px;
+    }
+    h3{
+      margin: auto auto 20px;
+    }
+    .btnValid{
+      width: 100%;
+      border-radius: 30px;
+      --background: none !important;
+      text-transform: none;
+      --box-shadow:none;
+      height: 40px;
+    }
+
+    .content-inp{
+      width: 100%;
+      color: #2a2a2a;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      .titre-top{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        ion-icon{
+          position: relative;
+          float: right;
+          right: 0;
+          bottom: 10px;
+          cursor: pointer;
+        }
+      }
+      ion-grid{
+        width: 100%;
+      }
+      ion-label{
+      }
+      ion-input, ion-textarea{
+        border-radius: 10px;
+        width: 100%;
+      }
+    }
+    .popup-btn{
+      width: 80px;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      margin-top: 20px;
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+    }
+  }
+}
+
+.date-pick{
+  width: 360px;
+  height: auto;
+  border-radius: 10px;
+  background: #fff;
+  .ionDate-f-red{
+    color: var(--ion-red)!important;
+  }
+  .ionDate-f-red{
+    color: var(--ion-green)!important;
+  }
+  ion-datetime{
+    background: none !important;
+
+    --ion-color-step-300: #e5e5e5;
+
+    ion-button{
+      border-radius: 30px;
+      font-size: 12px;
+      width: 100px;
+      height: 30px;
+      color: #fff !important;
+    }
+
+
+
+    .btn-annuler{
+      background: #9d9fa6;
+      color: #2a2a2a;
+    }
+  }
+
+}
+
+
+.hidden{
+  display: none !important;
+}
+
+
+.div-filter{
+  //border: solid 1px var(--ion-red);
+  width: 100%;
+  height: 70px;
+  .f-filter{
+    position: absolute;
+    float: right;
+    right: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100px;
+  }
+  .f-grid{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    .f-col{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      select{
+        padding: 10px;
+        background: #fff;
+        border-radius: 5px;
+        border: none;
+        margin-left: 5px;
+      }
+      select:hover{
+        outline: none;
+      }
+
+      ion-input{
+        padding-left: 0px !important;
+        width: 100% !important;
+      }
+
+      .f-input{
+        padding-left: 5px !important;
+        width: 125px !important;
+        background: #fff;
+        border-radius: 5px;
+        margin-left: 5px;
+
+      }
+
+      .cap{
+        width: 70px !important;
+      }
+
+
+
+    }
+  }
+}
+
+.f-invite{
+  margin-bottom: 10px;
+}
+
+.f-list-invite{
+  font-size: 12px;
+}
+
+.border-Red{
+  border: solid 1px var(--ion-red);
+}
+
+.border-green{
+  border: solid 1px var(--ion-green);
+}

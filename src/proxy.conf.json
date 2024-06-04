@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://rss.smart.iviflo.com/",
+    "secure": false
+  }
+}

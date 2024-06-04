@@ -1,0 +1,61 @@
+<app-layout-service [showCard2]="true">
+  <ng-container content>
+    <ion-card mode="ios" id="contenuService" [class]="theme.colorServiceCard+' '+ ' mere-card ion-padding'"   >
+      <div >
+        <div class="top-icon-title">
+          <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Enquête de satisfaction</ion-label>
+          <div class="icon-right" headerIcon>
+            <!--<ion-icon style="cursor: pointer"   [ngClass]="theme.color" name="add"></ion-icon>
+            <ion-icon [class.griser]="true" style="cursor: pointer" class="newspaper-icon"  [ngClass]="theme.color" name="notifications"></ion-icon>-->
+          </div>
+        </div>
+      </div>
+
+      <div [class]="theme.scrollbar+' scroller'" style="height: 85% !important;">
+        <div [class]="theme.family+' card-enquete ion-padding'" *ngIf="isNotif">
+          <span>Vous avez reçu une enquête de satisfaction pour votre constat <br> <strong [class]="theme.color">Bienvenue-20230808-132040</strong></span>
+          <br>
+          <hr [class]="theme.color+'-hr'">
+          <div class="date-constat">
+            <ion-icon [class]="theme.color" name="time-sharp"></ion-icon>
+            <span>Mar 08 juil à 13h20</span>
+          </div>
+          <button [class]="theme.bg" (click)="showEnquete()">Accéder à l'enquête</button>
+        </div>
+        <div class="card-principal" *ngIf="isEnquete">
+          <div [class]="theme.family+' card-enquete-2 ion-padding'">
+            <div [class]="theme.color+'-brd-bottom item-qst'">
+              <span>Conformité aux attentes</span>
+              <div class="start-note" >
+                <ion-icon (click)="selectNote(ind, qst1)" *ngFor="let i of qst1; let ind = index" [class]="theme.color" [name]="i.name"></ion-icon>
+              </div>
+            </div>
+            <div [class]="theme.color+'-brd-bottom item-qst'">
+              <span>Rapidité d'exécution</span>
+              <div class="start-note" >
+                <ion-icon (click)="selectNote(ind, qst2)" *ngFor="let i of qst2; let ind = index" [class]="theme.color" [name]="i.name"></ion-icon>
+              </div>
+            </div>
+            <div [class]="theme.color+'-brd-bottom item-qst'">
+              <span>Qualité de service</span>
+              <div class="start-note" >
+                <ion-icon (click)="selectNote(ind, qst3)" *ngFor="let i of qst3; let ind = index" [class]="theme.color" [name]="i.name"></ion-icon>
+              </div>
+            </div>
+            <div [class]="theme.color+'-brd-bottom item-qst'">
+              <span>Qualité d'écoutes</span>
+              <div class="start-note" >
+                <ion-icon (click)="selectNote(ind, qst4)" *ngFor="let i of qst4; let ind = index" [class]="theme.color" [name]="i.name"></ion-icon>
+              </div>
+            </div>
+          </div>
+          <textarea [class]="theme.family" placeholder="Votre commentaire"></textarea>
+        </div>
+        <div class="divbtn" *ngIf="isEnquete">
+          <button (click)="showEnquete()" [class]="theme.bg">Valider</button>
+          <button (click)="showEnquete()">Annuler</button>
+        </div>
+      </div>
+    </ion-card>
+  </ng-container>
+</app-layout-service>

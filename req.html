@@ -1,0 +1,15 @@
+<h1>HELOO</h1>
+<script>
+  const options = {method: 'POST', cors: true};
+  fetch('https://maps.googleapis.com/maps/api/place/autocomplete/json?input=abidj&types=establishment%7Cgeocode&location%3A5.3004632%2C-3.947865%40=&radius=500&language=en&key=AIzaSyB8EAwtn4Xo1mWWyQmmlPyOYvHre6NeRgE',
+    {
+      mode: 'cors',
+      // credentials: "include",
+      credentials: "same-origin",
+      headers: {
+        'Access-Control-Allow-Origin':'localhost'
+      }
+    }).then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));
+</script>

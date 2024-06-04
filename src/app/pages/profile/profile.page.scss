@@ -1,0 +1,22 @@
+.space-btn{
+  width: 100%;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+.btn-logout{
+  border: none;
+  width: 130px;
+  color: #fff;
+  padding: 10px;
+  border-radius: 0;
+  cursor: pointer;
+  text-align: center;
+}
+
+.px10{
+  font-size: 14px;
+}

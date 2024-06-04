@@ -1,0 +1,123 @@
+@use '../../../theme/variables.scss' as v;
+.principal2{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  .my-card-insc{
+    width: 550px;
+    //height: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 35px;
+  background: #fff;
+    h4{
+      height: 50px;
+      border-bottom: v.$secondary 1px solid;
+      margin-top: 30px;
+    }
+    .input-global{
+      width: 75%;
+      margin: auto;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      padding: 5px !important;
+      //border: solid 1px #91513d;
+      font-size: 15px;
+      height: 50px !important;
+    }
+    .div-btn{
+      width: 75%;
+      margin: auto;
+      margin-bottom: 15px;
+    }
+
+    .btn-login{
+      position: relative;
+      width: 100%;
+      margin: auto;
+      border-radius: 5px;
+      height: 50px;
+      color: #fff;
+      text-transform: none;
+      font-size: 15px;
+    }
+
+    ion-button{
+    //  --background: #91513d !important;
+    }
+
+    .no-compte{
+      width: 75%;
+      height: 50px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      align-items: center;
+      margin: auto;
+      span{
+        font-size: 15px;
+        margin: 0 !important;
+      }
+      .link-no-compte{
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.div-password{
+  .icon-pass{
+    position: relative;
+    float: right;
+    right: 15%;
+    top: -50px;
+    z-index: 100;
+    cursor: pointer;
+    color: rgb(66, 66, 66) !important;;
+  }
+}
+
+.my-popup{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgb(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .content-popup{
+    width: 300px;
+    height: 280px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    img{
+      width: 70px;
+    }
+
+    span{
+      font-family: 'Century Gothic', sans-serif;
+    }
+    .popup-btn{
+      width: 80px;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      margin-top: 20px;
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+    }
+  }
+}
+

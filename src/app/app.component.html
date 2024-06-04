@@ -1,0 +1,14 @@
+<ion-app>
+
+      <ion-router-outlet ></ion-router-outlet>
+  <div class="notification animate__animated animate__bounce" [class.hidden]="!showNotif" (click)="gotoNotif()">
+    <div [class]="theme.bg+' side'">
+      <ion-icon name="notifications-sharp"></ion-icon>
+    </div>
+    <div [class]="theme.family+' body-notif'">
+      <span [class]="theme.color+' titre-h2'">Notification</span>
+      <br>
+      <span class="text-span">Vous avez reçu une enquête de satisfaction pour votre constat <br> <strong [class]="theme.color">Bienvenue-20230808-132040</strong></span>
+    </div>
+  </div>
+</ion-app>

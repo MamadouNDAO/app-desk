@@ -1,0 +1,22 @@
+<ion-content>
+  <div class="ion-content">
+
+    <div class="menu">
+      <ion-list id="labels-list">
+        <ion-item lines="none" slot="header">
+          <ion-label class="title-app" >Services</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <div [routerLink]="label.link" routerLinkActive="selected" auto-hide="false" *ngFor="let label of module1">
+            <ion-item  lines="none">
+              <ion-icon class="unify-icon"  aria-hidden="true" slot="start" [ios]="label.icon" [md]="label.icon"></ion-icon>
+              <ion-label class="list-lab" >{{ label.label }}</ion-label>
+            </ion-item>
+          </div>
+        </div>
+      </ion-list>
+    </div>
+
+  </div>
+</ion-content>
+

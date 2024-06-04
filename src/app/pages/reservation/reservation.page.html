@@ -1,0 +1,577 @@
+<app-layout-service>
+
+  <ng-container content="">
+    <ion-card   mode="ios" id="contenuService" [class]="theme.colorServiceCard+' mere-card '+ ' ion-padding'"   >
+      <div [class.hidden]="isHistory">
+        <div class="top-icon-title">
+          <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Réservation de salle</ion-label>
+          <div class="icon-right" headerIcon>
+            <ion-spinner *ngIf="isLoadFav" [class]="theme.color+' loader-fav'"  name="lines"></ion-spinner>
+            <ion-icon style="cursor: pointer" class="newspaper-icon" (click)="showHistory()" [ngClass]="theme.color" name="newspaper"></ion-icon>
+          </div>
+        </div>
+        <div class="div-filter">
+
+            <div [class]="theme.family+' f-grid'">
+
+              <div class="f-col">
+                <ion-label [class]="theme.color">Date:</ion-label>
+                <div class="f-input" (click)="chooseDate('debut')">
+                  <ion-input class="inputDate" placeholder="date réservation" [class]="theme.family" type="text" #debut [value]="filtreDebut | date: 'E dd MMMM'" ></ion-input>
+                </div>
+              </div>
+              <ng-template #customCancelButton>
+                <button [class]="theme.bg+' cancelBtn '+theme.family" >Annuler</button>
+              </ng-template>
+              <ng-template #customOKButton>
+                <button [class]="theme.bg+' cancelBtn '+theme.family" >Confirmer</button>
+              </ng-template>
+              <div class="f-col timer">
+                <ion-label [class]="theme.color">Début</ion-label>
+                <input #hourDebutF [(ngModel)]="heureDebut" [class]="theme.family+' my-timePicker'" [ngxTimepicker]="pickerDebut" [format]="24" [defaultValue]="heureDebut" [readonly]="true">
+              </div>
+
+              <div class="f-col timer">
+                <ion-label [class]="theme.color">Fin</ion-label>
+                <input #hourFinF [(ngModel)]="heureFin" [class]="theme.family+' my-timePicker'" [ngxTimepicker]="pickerFin" [format]="24" [defaultValue]="heureFin" [readonly]="true" [min]="heureDebut">
+              </div>
+
+              <div class="f-col">
+                <ion-label [class]="theme.color">Capacité:</ion-label>
+                <div class="f-input cap">
+                  <ion-input min="1" type="number" #capacity value="1"></ion-input>
+                </div>
+              </div>
+              <div class="f-col">
+                <ion-label>Etage</ion-label>
+                <select name="" id="" #etage (input)="frontFiltre(etage, salle)">
+                  <option value="all">Tous les étages</option>
+                  <option *ngFor="let floor of floors" [value]="floor">{{floor}}</option>
+                </select>
+              </div>
+              <div class="f-col">
+                <ion-label [class]="theme.color">Salle:</ion-label>
+                <div class="f-input f-salle">
+                  <ion-input (input)="frontFiltre(etage, salle)" #salle  placeholder="Recherche une salle" type="text"  ></ion-input>
+                </div>
+              </div>
+              <ngx-material-timepicker [theme]="customTheme" [confirmBtnTmpl]="customOKButton" [cancelBtnTmpl]="customCancelButton"  #pickerDebut [minutesGap]="15"></ngx-material-timepicker>
+              <ngx-material-timepicker [theme]="customTheme" [confirmBtnTmpl]="customOKButton" [cancelBtnTmpl]="customCancelButton"  #pickerFin [minutesGap]="15" [min]="heureDebut"></ngx-material-timepicker>
+
+              <div *ngIf="!isFiltre" [ngClass]="theme.color == 'ivi-red' ? 'border-red' : 'border-green'" [class]="theme.family+' f-filter '+theme.color"  (click)="doFiltre(debut,hourDebutF,hourFinF,capacity, etage, salle)">
+                <ion-icon name="search-outline"></ion-icon>
+                <span >Filtrer</span>
+              </div>
+              <div *ngIf="isFiltre" [ngClass]="theme.color == 'ivi-red' ? 'border-red' : 'border-green'" [class]="theme.family+' f-filter '+theme.color"  (click)="initFiltre()">
+
+                <span >Réinitialiser</span>
+              </div>
+            </div>
+          <br>
+            <div class="f-grid">
+
+            </div>
+
+        </div>
+      </div>
+      <br><br>
+      <div [class]="theme.scrollbar+' scroller'" [class.hidden]="isHistory">
+        <ion-list  lines="none" *ngFor="let room of filteredRooms; index as idx" [class.hidden]="!loaded" >
+
+          <ion-item [class]="theme.borderItem" [hidden]="isFiltre && room.reservationStatus.state === 'unavailable'">
+            <div  [class]="theme.family+' content-room'">
+              <div  [class]="theme.family+' row-room'">
+                <div class="ivi-flex-row room-name">
+                  <ion-icon [class]="theme.color" name="business"></ion-icon>
+                  <span class="list-lab"><!--{{room.building}} - {{room.floor.name}} - -->{{room.name}}</span>
+                </div>
+                <div class="ivi-flex-row room-name">
+                  <ion-icon [class]="theme.color" name="people"></ion-icon>
+                  <span class="list-lab">{{room.zone ? room.zone.maximumCapacity : ''}} personne(s)</span>
+                  <!--<span class="list-lab">{{ room.reservationStatus.state == 'available' ? 'disponible' : 'occupée'}}</span>-->
+                  <span class="list-lab">{{showEtatRoom(room.reservationStatus)}}  <!--{{ statusRerv(room.reservationStatus) }}--></span>
+                </div>
+
+              </div>
+              <div [class]="theme.family+' row-room state'">
+                <div class="ivi-flex-row see-map" (click)="goToMap(idx, room)">
+                  <span>Voir la carte</span>
+                  <ion-icon slot="end" [class]="theme.color+' map-icon'" name="map" ></ion-icon>
+                </div>
+                <button (click)="openReservation(room)"  [class]="theme.bg+' btn-reserver '+theme.family">Réserver</button>
+
+
+
+              </div>
+
+            </div>
+
+          </ion-item>
+
+        </ion-list>
+        <br><br><br>
+        <ion-list *ngIf="!loaded">
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+      <div [class]="theme.family" [class.hidden]="!isHistory">
+        <div class="top-icon-title">
+          <div class="icon-left" headerIcon>
+
+            <ion-icon style="cursor: pointer" (click)="showHistory()" [ngClass]="theme.color" name="arrow-back"></ion-icon>
+          </div>
+          <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Historique réservation</ion-label>
+          <div class="icon-right" headerIcon>
+            <ion-spinner *ngIf="isLoadFav" [class]="theme.color+' loader-fav'"  name="lines"></ion-spinner>
+          </div>
+          <ion-segment #ionseg value="encours" mode="md" (ionChange)="segmentChange(ionseg)">
+            <ion-segment-button value="encours">
+              <ion-label>En cours</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="termine">
+              <ion-label>Terminées</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+
+        </div>
+
+      </div>
+      <div *ngIf="isEncours" [class]="theme.family+' f-history scroller '+theme.scrollbar" [class.hidden]="!isHistory">
+        <ion-list lines="none" *ngFor="let r of historiques; index as ix" [class.hidden]="!loadedHistory">
+          <ion-item [class]="theme.borderItem" *ngIf="(convertToDate(r.dateEnd) >= currentDate) && !r.isCanceled">
+            <div  [class]="theme.family+' content-room'">
+              <div  [class]="theme.family+' row-room'">
+                <div class="ivi-flex-row room-name">
+                  <ion-icon [class]="theme.color" name="business"></ion-icon>
+                  <span class="list-lab"><!--{{r.room.building}} - {{r.room.floor}} ---> {{r.room.name}}</span>
+                </div>
+                <div class="ivi-flex-row room-name">
+                  <ion-icon [class]="theme.color" name="calendar-clear"></ion-icon>
+                  <span class="list-lab">{{r.subject}}</span>
+                </div>
+                <div class="ivi-flex-row row-date">
+                  <ion-icon [class]="theme.color" name="calendar"></ion-icon>
+                  <span class="list-lab">Le {{ r.dateStart | date: "E dd MMMM" }} de <strong [class]="theme.color">{{ r.dateStart | date: "HH:mm" }}</strong> à <strong [class]="theme.color">{{ r.dateEnd | date: "HH:mm" }}</strong></span>
+
+                </div>
+
+              </div>
+              <div [class]="theme.family+' row-room state'" style="gap: 6px !important;">
+                <div class="ivi-flex-row see-map" (click)="goToMap2(ix, r)">
+                  <span>Voir la carte</span>
+                  <ion-icon slot="end" [class]="theme.color+' map-icon'" name="map" ></ion-icon>
+                </div>
+                <div class="f-p-btn">
+                  <button  *ngIf="convertToDate(r.dateStart) >= currentDate" (click)="makeUpdateReservation(r)"  style=" width: 80px !important;"  [class]="theme.bg+' btn-reserver '+theme.family">Modifier</button>
+                </div>
+
+                <div class="f-p-btn">
+                  <button *ngIf="convertToDate(r.dateEnd) >= currentDate" (click)="ouvreLiberation(r.id)"  style=" width: 80px !important;" [class]="theme.bg+' btn-reserver '+theme.family">Annuler</button>
+                </div>
+
+                <!--<div class="f-p-btn">
+                  <button   (click)="showItineraire(r)"  style=" width: 80px !important;"  [class]="theme.bg+' btn-reserver '+theme.family">Itinéraire</button>
+                </div>-->
+
+              </div>
+
+            </div>
+
+          </ion-item>
+
+        </ion-list>
+        <br><br><br>
+      </div>
+      <div *ngIf="!isEncours" [class]="theme.family+' f-history scroller '+theme.scrollbar" [class.hidden]="!isHistory">
+        <ion-list lines="none" *ngFor="let r of historiques; index as ix" [class.hidden]="!loadedHistory">
+          <ion-item [class.hidden]="r.type == 'bulle'" [class]="theme.borderItem" *ngIf="(convertToDate(r.dateEnd) < currentDate) || r.isCanceled">
+            <div  [class]="theme.family+' content-room'">
+              <div  [class]="theme.family+' row-room'">
+                <div class="ivi-flex-row room-name">
+                  <ion-icon [class]="theme.color" name="business"></ion-icon>
+                  <span class="list-lab"><!--{{r.room.building}} - {{r.room.floor}} ---> {{r.room.name}}</span>
+                </div>
+                <div class="ivi-flex-row row-date">
+                  <ion-icon [class]="theme.color" name="calendar"></ion-icon>
+                  <span class="list-lab">Le {{ r.dateStart | date: "E dd MMMM" }} de <strong [class]="theme.color">{{ r.dateStart | date: "HH:mm" }}</strong> à <strong [class]="theme.color">{{ r.dateEnd | date: "HH:mm" }}</strong></span>
+                </div>
+
+
+              </div>
+              <div [class]="theme.family+' row-room state'" style="gap: 3px !important;">
+                <div class="ivi-flex-row see-map" (click)="goToMap2(ix, r)">
+                  <span>Voir la carte</span>
+                  <ion-icon slot="end" [class]="theme.color+' map-icon'" name="map" ></ion-icon>
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </ion-item>
+
+        </ion-list>
+        <br><br><br>
+      </div>
+      <div>
+        <ion-list *ngIf="!loaded">
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+      <div>
+        <ion-list *ngIf="!loadedHistory && isHistory">
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item  style="border: none !important;">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-card>
+
+
+  </ng-container>
+
+
+
+</app-layout-service>
+
+
+<div class="my-popup " [class.hidden]="!isReservation">
+  <div class="content-popup animate__animated animate__backInUp">
+
+    <div [class]="theme.family+' content-inp'">
+      <div [class]="theme.color+' titre-top'">
+        <h3 >Réservation de salle</h3>
+        <span>{{ nameRoomToReserve }}</span>
+        <ion-icon style="color: #fff" (click)="closeReservation()" [class]="theme.bg" name="close"></ion-icon>
+
+      </div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-label [class]="theme.color">Date</ion-label>
+            <ion-input [readonly]="true" [ngClass]="theme.color == 'ivi-red' ? 'border-red' : 'border-green'" [class]="theme.family+' inputDate'" (click)="ouvreCalendar('start')" [value]="dateStart | date: 'E dd MMMM'" type="text" placeholder="Date de réservation"></ion-input>
+          </ion-col>
+          <ngx-material-timepicker [theme]="customTheme" [confirmBtnTmpl]="customOKButton" [cancelBtnTmpl]="customCancelButton"  #pickerDebutR [minutesGap]="15"></ngx-material-timepicker>
+          <ngx-material-timepicker [theme]="customTheme" [confirmBtnTmpl]="customOKButton" [cancelBtnTmpl]="customCancelButton"  #pickerFinR [minutesGap]="15" [min]="heureDebut"></ngx-material-timepicker>
+
+
+          <ion-col size="3">
+            <ion-label [class]="theme.color">Début</ion-label>
+            <input [(ngModel)]="heureDebut" [ngClass]="theme.color == 'ivi-red' ? 'border-red' : 'border-green'" #hourDebut [class]="theme.family+' pickerR my-timePicker'" [ngxTimepicker]="pickerDebutR" [format]="24" [defaultValue]="heureDebut" [readonly]="true">
+
+          </ion-col>
+
+          <ion-col size="3">
+            <ion-label [class]="theme.color">Fin</ion-label>
+            <input [(ngModel)]="heureFin" [ngClass]="theme.color == 'ivi-red' ? 'border-red' : 'border-green'"  #hourFin [class]="theme.family+' pickerR  my-timePicker'" [ngxTimepicker]="pickerFinR" [format]="24" [defaultValue]="heureFin" [readonly]="true" [min]="heureDebut">
+          </ion-col>
+
+        </ion-row>
+        <ion-row>
+
+
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-label [class]="theme.color">Objet</ion-label>
+            <ion-textarea [value]="objetResrvation" [ngClass]="theme.color == 'ivi-red' ? 'border-red' : 'border-green'" #subject [class]="theme.family" placeholder="Objet de la réservation"></ion-textarea>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-label [class]="theme.color">Participants</ion-label>
+            <ion-input #Invites (input)="filtreEmail(Invites)" [ngClass]="theme.color == 'ivi-red' ? 'border-red' : 'border-green'" placeholder="Saisir l'e-mail et appuyer sur Entrer" [class]="theme.family+' f-invite'" type="text" [(ngModel)]="userEmail" (keyup.Enter)= "doSomething(userEmail)"></ion-input>
+
+            <div  class="content-chip">
+              <ion-chip [ngClass]="emailInvalides.includes(item) ? 'toRemove' : ''" *ngFor="let item of particpants; let i = index;" [class]="theme.family+' my-chip '+theme.bg">
+                <ion-label [class]="theme.family+' f-list-invite'">{{item}}</ion-label>
+                <ion-icon name="trash-outline" (click)="removeItem(i)"></ion-icon>
+              </ion-chip>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+    <div [class]="theme.family+' content-inp'">
+
+    </div>
+    <span *ngIf="isEmailInvalid" [class]="theme.family" style="color: red;">Les emails en rouge n'ont pas de compte!</span>
+    <span *ngIf="isInvalid" [class]="theme.family" style="color: red;">Veuillez remplir tous les champs!</span>
+    <span *ngIf="isHourInvalid" [class]="theme.family" style="color: red;">Veuillez entrez un crénaux horaire valide!</span>
+    <ion-button (click)="submitReservation(subject)"  [class]="theme.bg+' '+theme.family+ ' btnValid'">
+      Réserver
+      <ion-spinner *ngIf="isSendding" color="white"  name="dots"></ion-spinner>
+    </ion-button>
+
+
+  </div>
+  <div class="list-completion" *ngIf="isAutocomplete">
+      <span [class]="theme.family+' '+theme.bg" (click)="addToParticipants(sug.email, Invites)" *ngFor="let sug of suggestionEmails">{{sug.email}}</span>
+  </div>
+  <div class="for-date date-pick animate__animated animate__backInRight" [hidden]="!isCalendar && !isCalendarEnd">
+    <ion-datetime presentation="date" [ngClass]="theme.color == 'ivi-red' ? 'ionDate-f-red' : 'ionDate-f-green'" [hidden]="!isCalendar" [(ngModel)]="dateStart" #datetime locale="fr-FR" [showDefaultButtons]="true">
+      <span slot="time-label">Heure</span>
+      <ion-buttons slot="buttons">
+        <ion-button class="btn-annuler"  (click)="annulerDate()">Annuler</ion-button>
+        <ion-button  [ngClass]="theme.bg" (click)="confirmeDate(datetime)">Confirmer</ion-button>
+      </ion-buttons>
+    </ion-datetime>
+
+    <ion-datetime [hidden]="!isCalendarEnd" [(ngModel)]="dateEnd" #datetimeEnd locale="fr-FR" [showDefaultButtons]="true">
+      <ion-buttons slot="buttons">
+        <ion-button class="btn-annuler"  (click)="annulerDate()">Annuler</ion-button>
+        <ion-button [ngClass]="theme.bg"  (click)="confirmeDateEnd(datetimeEnd)">Confirmer</ion-button>
+      </ion-buttons>
+
+    </ion-datetime>
+  </div>
+</div>
+
+<div class="my-popup" [class.hidden]="!isSelectDu && !isSelectAu">
+  <div class="content-popup animate__animated animate__backInUp">
+    <div class="for-date date-pick">
+      <ion-datetime color="primary" presentation="date" [hidden]="!isSelectDu" [(ngModel)]="filtreDebut" #dateFiltreStart locale="fr-FR" [showDefaultButtons]="true">
+        <span slot="time-label">Heure</span>
+        <ion-buttons slot="buttons">
+          <ion-button class="btn-annuler"  (click)="annulerDate()">Annuler</ion-button>
+          <ion-button [ngClass]="theme.bg" (click)="confirmSelection(dateFiltreStart)">Confirmer</ion-button>
+        </ion-buttons>
+      </ion-datetime>
+      <ion-datetime presentation="date" [hidden]="!isSelectAu" [(ngModel)]="filtreEnd" #dateFiltreEnd locale="fr-FR" [showDefaultButtons]="true">
+        <ion-buttons slot="buttons">
+          <ion-button class="btn-annuler"  (click)="annulerDate()">Annuler</ion-button>
+          <ion-button [ngClass]="theme.bg" (click)="confirmSelection(dateFiltreEnd)">Confirmer</ion-button>
+        </ion-buttons>
+      </ion-datetime>
+    </div>
+
+  </div>
+</div>
+
+<div class="my-popup popup-liberation " [class.hidden]="!isLiberationSalle">
+  <div class="content-popup animate__animated animate__backInUp">
+    <span [class]="theme.family+' '+theme.color">Voulez-vous annuler la réservation?</span>
+    <div class="f-flex">
+      <ion-button (click)="MakeLiberer('cancel')" [class]="theme.family+' '+theme.bg">ANNULER</ion-button>
+      <ion-button (click)="MakeLiberer('ok')" [class]="theme.family+' '+theme.bg">CONFIRMER</ion-button>
+    </div>
+  </div>
+</div>
+
+
+<div class="popup-trajet" *ngIf="isItineraire">
+  <div class="card-trajet ion-padding">
+    <h2 [class]="theme.color+' '+theme.family">Transport</h2>
+    <ion-icon (click)="closeTrajet()" [class]="theme.color+' icon-close-trajet'" name="close-outline"></ion-icon>
+    <div [class]="theme.borderItem+' part-input'">
+      <ion-icon [class]="theme.color" name="search-outline"></ion-icon>
+      <ion-input #searchTrajet (ionInput)="enSaisieTrajet(searchTrajet)" [(ngModel)]="inputSearch" [class]="theme.color+' '+theme.family" type="text" placeholder="Rechercher une adresse"></ion-input>
+      <ion-icon [class]="theme.color+' icon-delete'" name="close-outline"></ion-icon>
+    </div>
+    <div *ngIf="showComplete" class="result-search">
+      <span (click)="reservDescript(completion)" *ngFor="let completion of googleArray" [class]="theme.color+' '+theme.family">{{completion.description}}</span>
+    </div>
+    <ion-list>
+      <ion-radio-group #radioValue [(ngModel)]="typeTrajet" >
+      <ion-item [class]="theme.color+' list-moyen-tr '+theme.family">
+        <ion-icon [class]="theme.color" name="bicycle-sharp"></ion-icon>
+        <span>Vélo</span>
+        <div class="detail-trajet">
+          <span>{{getDistance(TravelMode.BICYCLING)}}</span>
+          <span>{{getDuration(TravelMode.BICYCLING)}}</span>
+        </div>
+        <ion-radio slot="end" value="BICYCLING"></ion-radio>
+      </ion-item>
+      <ion-item [class]="theme.color+' list-moyen-tr '+theme.family">
+        <ion-icon [class]="theme.color" name="car-sharp"></ion-icon>
+        <span>Voiture</span>
+        <div class="detail-trajet">
+          <span>{{getDistance(TravelMode.DRIVING)}}</span>
+          <span>{{getDuration(TravelMode.DRIVING)}}</span>
+        </div>
+        <ion-radio slot="end" value="DRIVING"></ion-radio>
+      </ion-item>
+      <ion-item [class]="theme.color+' list-moyen-tr '+theme.family">
+        <ion-icon [class]="theme.color" name="walk-sharp"></ion-icon>
+        <span>Piéton</span>
+        <div class="detail-trajet">
+          <span>{{getDistance(TravelMode.WALKING)}}</span>
+          <span>{{getDuration(TravelMode.WALKING)}}</span>
+        </div>
+        <ion-radio slot="end" value="WALKING"></ion-radio>
+      </ion-item>
+      <ion-item [class]="theme.color+' list-moyen-tr '+theme.family">
+        <ion-icon [class]="theme.color" name="bus-sharp"></ion-icon>
+        <span>Transport en commun</span>
+        <div class="detail-trajet">
+          <span>{{getDistance(TravelMode.TRANSIT)}}</span>
+          <span>{{getDuration(TravelMode.TRANSIT)}}</span>
+        </div>
+        <ion-radio slot="end" value="TRANSIT"></ion-radio>
+      </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <button *ngIf="isData" (click)="setTrajetReservation()" [class]="theme.bg+' btnSauv '+theme.family">
+      <span>Sauvegarder</span>
+      <ion-spinner *ngIf="isloaTrajet" [class]="theme.color+' loader-fav'"  name="lines"></ion-spinner>
+
+    </button>
+  </div>
+</div>
+
+
+<div class="popup-alert" *ngIf="isPopupMsg">
+  <div class="card-notif">
+    <div class="milieu">
+      <ion-icon [class]="colorIconReserv" [name]="iconResrv"></ion-icon>
+      <span [class]="theme.family">{{messageReserv}}</span>
+    </div>
+    <button (click)="closePopupMsg()" [class]="theme.family">OK</button>
+  </div>
+</div>
+
+<div id="map">
+
+</div>

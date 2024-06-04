@@ -1,0 +1,92 @@
+<app-layout-service>
+
+
+
+  <ng-container content>
+    <ion-card mode="ios" id="contenuService" [class]="theme.colorServiceCard+' ' + ' mere-card ion-padding'"   >
+      <div >
+        <div class="top-icon-title">
+          <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Parking</ion-label>
+          <div class="icon-right" headerIcon>
+            <ion-icon style="cursor: pointer" (click)="goTo('notifications')" [ngClass]="theme.color" name="notifications"></ion-icon>
+            <ion-icon style="cursor: pointer" class="newspaper-icon" (click)="goTo('historique')" [ngClass]="theme.color" name="newspaper"></ion-icon>
+          </div>
+        </div>
+        <div class="div-filter">
+
+          <div [class]="theme.family+' f-grid'">
+
+            <div class="f-col">
+              <ion-label [class]="theme.color">Du:</ion-label>
+              <div class="f-input" (click)="chooseDate('debut')">
+                <ion-input [class]="theme.family" type="text" #debut [value]="filtreDebut | date: 'dd-MM-YYYY HH:mm'" ></ion-input>
+              </div>
+            </div>
+            <div class="f-col">
+              <ion-label [class]="theme.color">Au:</ion-label>
+              <div class="f-input" (click)="chooseDate('fin')">
+                <ion-input [class]="theme.family" type="text" #fin [value]="filtreEnd | date: 'dd-MM-YYYY HH:mm'" ></ion-input>
+              </div>
+            </div>
+            <div class="f-col">
+              <ion-label [class]="theme.color">Capacité:</ion-label>
+              <div class="f-input cap">
+                <ion-input min="1" type="number" #capacity value="1"></ion-input>
+              </div>
+            </div>
+            <div [ngClass]="theme.color == 'ivi-red' ? 'border-red' : 'border-green'" [class]="theme.family+' f-filter '+theme.color"  (click)="doFiltre(debut, fin, capacity)">
+              <ion-icon name="search-outline"></ion-icon>
+              <span >Filter</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div [class]="theme.scrollbar+' scroller'">
+        <ion-list lines="none" *ngFor="let room of rooms; index as idx">
+
+          <ion-item [ngClass]="theme.color == 'ivi-red' ? 'border-red' : 'border-green'">
+            <div (click)="openReservation(room.id)" [class]="theme.family+' content-room'">
+              <div [class]="theme.family+' row-room'">
+                <div class="ivi-flex-row room-name">
+                  <ion-icon [class]="theme.color" name="car-outline"></ion-icon>
+                  <span class="list-lab">{{room.building}} - {{room.floor.name}} - {{room.name}}</span>
+                </div>
+                <div class="ivi-flex-row">
+                  <ion-icon [class]="theme.color" name="people-outline"></ion-icon>
+                  <span class="list-lab">{{room.zone.maximumCapacity}} personne(s)</span>
+                </div>
+
+              </div>
+              <div [class]="theme.family+' row-room state'">
+
+
+                <span class="list-lab">Statut: {{room.reservationStatus.state == 'available' ? 'disponible' : 'occupée'}}</span>
+
+              </div>
+
+            </div>
+            <ion-label (click)="openModal(true)">
+              <p [class]="theme.family+' list-lab'" >
+                <strong id="salle_{{room.id}}" [class]="theme.color+' strong'">{{room.status}}</strong> -
+                jusqu'à
+                <span class="currentEndDate" >{{room.dateFin ? (room.dateFin | date :'HH:mm') : 'demain'}}</span>
+              </p>
+              <p [class]="theme.family+' list-lab'">
+                {{room.name}}
+                <br>Étage {{room.floor}}<br>
+                {{room.personne}} personne(s)<br>
+              </p>
+            </ion-label>
+            <!--<ion-icon slot="end" class="map-icon" name="map-outline" (click)="goToMap(idx, room)"></ion-icon>-->
+          </ion-item>
+
+        </ion-list>
+      </div>
+
+
+    </ion-card>
+  </ng-container>
+
+</app-layout-service>
+

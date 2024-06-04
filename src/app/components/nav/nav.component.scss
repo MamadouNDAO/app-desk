@@ -1,0 +1,37 @@
+@use '../../../theme/variables.scss' as v;
+
+
+.menu-bx{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 .5rem;
+}
+
+.logo-bx{
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+
+.icon1{
+  font-size: 25px;
+}
+
+.icon-bx{
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: aliceblue;
+  border-radius: 100%;
+  margin-right: .2rem;
+}
+
+.iconDidacticiel{
+  color: v.$primary;
+  font-size: 32px;
+  margin-bottom: 0.4rem;
+}

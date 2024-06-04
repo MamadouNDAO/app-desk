@@ -1,0 +1,96 @@
+<app-layout-service>
+  <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">{{title}} </ion-label>
+
+  <ng-container content="">
+  <ion-card id="contenuService" [class]="theme.colorServiceCard+' '+theme.scrollbar + ' mere-card ion-padding'">
+    <div >
+      <div class="top-icon-title">
+        <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Transport</ion-label>
+        <div class="icon-right" headerIcon>
+          <!--<ion-icon [class.griser]="true"  style="cursor: pointer"  [ngClass]="theme.color" name="notifications"></ion-icon>
+          <ion-icon [class.griser]="true"  style="cursor: pointer" class="newspaper-icon"  [ngClass]="theme.color" name="newspaper"></ion-icon>-->
+
+        </div>
+      </div>
+      <ion-searchbar (ionClear)="clearSearch()" [class]="theme.family+' searchbar-input '" (keydown)="myAutoMapComplete($event)" [ngClass]="" [(ngModel)]="input" inputPlace placeholder="Rechercher" ></ion-searchbar>
+    </div>
+
+    <ion-list *ngIf="showComplete" class="autoCompletepredictions">
+      <ion-item (click)="reservDescript(completion)" *ngFor="let completion of autoCompletepredictions" >
+        <ion-label [class]="theme.family"> {{completion.description}} </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list [class]="theme.scrollbar+' scroller'">
+
+      <ion-item (click)="openMap(TravelMode.BICYCLING)">
+          <ion-icon [class]="theme.color" name="bicycle" slot="start"></ion-icon>
+          <ion-label [class]="theme.family+' f-size-14'">
+            <p class=" list-lab">Vélo</p>
+            <p [hidden]="!isData" class="list-lab"> {{getDuration(TravelMode.BICYCLING)}} </p>
+            <p [hidden]="!isData" class="list-lab"> {{getDistance(TravelMode.BICYCLING)}} </p>
+          </ion-label>
+           <!-- <ion-icon name="star-outline"></ion-icon>-->
+        </ion-item>
+
+      <ion-item (click)="openMap(TravelMode.DRIVING)">
+        <ion-icon [class]="theme.color" name="car" slot="start"></ion-icon>
+        <ion-label [class]="theme.family+' f-size-14'">
+          <p class=" list-lab">Taxi</p>
+          <p [hidden]="!isData" class="list-lab"> {{getDuration(TravelMode.DRIVING)}} </p>
+          <p [hidden]="!isData" class="list-lab"> {{getDistance(TravelMode.DRIVING)}} </p>
+        </ion-label>
+
+      </ion-item>
+
+      <ion-item (click)="openMap(TravelMode.WALKING)">
+        <ion-icon [class]="theme.color" name="walk" slot="start"></ion-icon>
+        <ion-label [class]="theme.family+' f-size-14'">
+          <p class=" list-lab">Piéton</p>
+          <p [hidden]="!isData" class="list-lab"> {{getDuration(TravelMode.WALKING)}} </p>
+          <p [hidden]="!isData" class="list-lab"> {{getDistance(TravelMode.WALKING)}} </p>
+        </ion-label>
+
+      </ion-item>
+
+
+
+      <ion-item (click)="openMap(TravelMode.TRANSIT)">
+        <ion-icon [class]="theme.color" name="train" slot="start"></ion-icon>
+        <ion-label [class]="theme.family+' f-size-14'">
+          <p class=" list-lab">Transport en commun</p>
+          <p [hidden]="!isData" class="list-lab"> {{getDuration(TravelMode.TRANSIT)}} </p>
+          <p [hidden]="!isData" class="list-lab"> {{getDistance(TravelMode.TRANSIT)}} </p>
+        </ion-label>
+
+      </ion-item>
+
+      <ion-item (click)="openMap(TravelMode.DRIVING)">
+        <ion-icon [class]="theme.color" name="car-sport" slot="start"></ion-icon>
+        <ion-label [class]="theme.family+' f-size-14'">
+          <p class=" list-lab">Voiture Personnelle</p>
+          <p [hidden]="!isData" class="list-lab"> {{getDuration(TravelMode.DRIVING)}} </p>
+          <p [hidden]="!isData" class="list-lab"> {{getDistance(TravelMode.DRIVING)}} </p>
+        </ion-label>
+
+      </ion-item>
+
+    </ion-list>
+    <button (click)="reinitData()" *ngIf="isData" [class]="theme.bg+' btn-init '+theme.family">Réinitialiser</button>
+    </ion-card>
+
+
+
+
+  </ng-container>
+
+
+
+</app-layout-service>
+<div class="my-popup" [class.hidden]="!isPopup">
+  <ion-icon [class]="theme.color+' icon-close'" (click)="closeBottomSheet()" slot="end" name="close-circle-outline"></ion-icon>
+
+  <div id="map" class="content-popup animate__animated animate__backInUp">
+
+  </div>
+</div>

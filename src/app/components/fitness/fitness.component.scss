@@ -1,0 +1,144 @@
+@use './../../../theme/variables.scss' as v;
+
+.principal{
+    background-color:  v.$secondary;
+    height: 100%;
+}
+ion-card{
+    border-radius: 25px;
+    text-align: center;
+}
+span{
+    font-size: 20px;
+    color: v.$primary;
+}
+.paragraphfAbonnement{
+    font-size: 15px;
+    margin:0;
+    padding: 0;
+    color: v.$primary;
+
+}
+.icon{
+    color: v.$primary;
+    font-size: 35px;
+}
+.firstColumn{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.card{
+    padding: 2%;
+}
+.buttonColumn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+img{
+    width:20rem;
+}
+.buttonColumn1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calendarBadge{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+button{
+   // width: 60%;
+    border-radius: 10px;
+    font-size: 15px;
+    //padding: 0.8rem;
+    margin-top: 0.5rem;
+    color: v.$primary;
+
+}
+.secondColumn{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.secondCardTitle{
+    font-size: 15px;
+}
+.secondCardTitleActivités{
+    font-size: 20px;
+}
+ion-input{
+    background-color:v.$secondary;
+    width: 95%;
+    border-radius: 20px;
+    --padding-start: 15px;
+}
+
+.favButton{
+  width: 43%;
+  margin: 6px ;
+  padding: 0.8rem;
+}
+.payButton{
+    height: 30px !important;
+    border-radius: 10px !important;
+    background-color: v.$primary !important;
+    font-size: 17px !important;
+    color: v.$blanc !important;
+}
+.barbell{
+    font-size: 30px;
+}
+.active {
+    background-color: #595755;
+    color: white;
+}
+
+.iconBx{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#showFormCours{
+  margin-top: 2rem !important;
+}
+
+.bottomSheet{
+  position: fixed;
+  display: none;
+  width: 100%;
+  bottom: 0;
+  border-radius: 30px 30px 0px 0px;
+  z-index: 20;
+  background-color: v.$blanc;
+  transform: translate3d(0,0,0);
+  padding: 1rem;
+}
+.bottomSheetProductName{
+  color: v.$primary;
+}
+.bottomSheetProductprice{
+  color: v.$primary;
+  font-size: 18px;
+}
+.bottomSheetNameDiv{
+  text-align: center;
+  border-bottom: 0.5px solid v.$secondary;
+}
+.bottomSheetProductDescription{
+  font-size: 13px;
+  color: v.$primary;
+}
+.paymentMessage{
+  color: #514e4c;
+    font-size: 15px;
+}
+
+.centerElement{
+  text-align: center;
+}

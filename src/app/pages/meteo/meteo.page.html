@@ -1,0 +1,246 @@
+
+
+<app-layout-service [showCard2]="true">
+
+<!--  <ion-label class="ion-text-center" [ngClass]="theme.title">Météo</ion-label>-->
+  <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Météo</ion-label>
+
+  <div headerIcon>
+<!--    <ion-icon class="ion-float-end icon ion-padding-horizontal" name="list-outline" (click)="switchAddView()"></ion-icon>-->
+<!--    <ion-icon class="ion-float-end icon ion-padding-horizontal" name="add-outline" (click)="switchHistoryView()"></ion-icon>-->
+    <ion-icon [class]="theme.color+' ion-float-end icon'" (click)="bottomShet()" name="add-outline"></ion-icon>
+
+  </div>
+  <ion-searchbar [ngClass]="theme.searchbar" inputPlace placeholder="" ></ion-searchbar>
+
+
+  <ng-container content>
+    <ion-card mode="ios" id="contenuService" [class]="theme.colorServiceCard+' '+ ' mere-card ion-padding'"   >
+      <div >
+        <div class="top-icon-title">
+          <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Météo</ion-label>
+          <div class="icon-right" headerIcon>
+            <ion-icon style="cursor: pointer" (click)="goTo('notifications')" [ngClass]="theme.color" name="notifications"></ion-icon>
+            <ion-icon style="cursor: pointer" class="newspaper-icon" (click)="goTo('historique')" [ngClass]="theme.color" name="newspaper"></ion-icon>
+            <!--<ion-icon class="ion-float-end icon ion-padding-horizontal" name="list-outline" (click)="switchAddView()"></ion-icon>
+            <ion-icon class="ion-float-end icon ion-padding-horizontal" name="add-outline" (click)="switchHistoryView()"></ion-icon>-->
+          </div>
+        </div>
+        <ion-searchbar [ngClass]="theme.searchbar" [(ngModel)]="input" inputPlace placeholder="Rechercher" ></ion-searchbar>
+      </div>
+
+      <!--    <h1>Counter: {{ counter$ | async }}</h1>-->
+      <!--    <button (click)="stateService.decrement()">Decrement</button>-->
+      <!--    <button (click)="stateService.resetState()">Reset</button>-->
+      <!--    <button (click)="stateService.increment()">Increment</button>-->
+
+    <div [class]="theme.scrollbar+' scroller'">
+      <div>
+        <!-- <div *ngIf="weather" class="weather">
+          <ion-grid style="padding-top: 10px;" >
+            <ion-row>
+              <ion-col size="7" class="colStart">
+                <span class="cityName">{{weather.name}} </span>
+              </ion-col>
+              <ion-col class="colStart date-info">
+                {{ today| date }}<br>{{now}}
+              </ion-col>
+
+              <ion-col size="7" class="colStart">
+                <ion-icon name="{{ icon }}" class="weather-icon"></ion-icon>
+              </ion-col>
+
+              <ion-col class="statistique">
+                <ion-col size="6" class="span-tem ">
+                  <ion-icon class="icon2" name="thermometer-outline"></ion-icon>
+                  <p >{{weather.main.temp | number: '1.0-0'}}C°</p>
+                </ion-col>
+
+                <ion-col size="6" class="span-tem" >
+                  <ion-icon class="icon2" name="water-outline"></ion-icon>
+                  <p >{{weather.main.humidity}}%</p>
+                </ion-col>
+
+                <ion-col size="6" class="span-tem" >
+                  <ion-icon class="icon2" name="speedometer-outline"></ion-icon>
+                  <p >{{weather.main.pressure}}</p>
+                </ion-col>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+        </div> -->
+
+        <div *ngIf="weather" class="weather">
+          <!-- <ion-grid style="padding-top: 10px;" >
+            <ion-row>
+              <ion-col size="2" class="colStart">
+                <ion-icon class="icon2" name="locate-outline"></ion-icon>
+              </ion-col>
+              <ion-col size="4" class="colStart">
+                <span class="cityName">{{weather.name}} </span>
+              </ion-col>
+              <ion-col size="6" class="colStart date-info">
+                {{ today| date }}<br>{{now}}
+              </ion-col>
+
+              <ion-col size="7" class="colStart">
+                <ion-icon name="{{ icon }}" class="weather-icon"></ion-icon>
+              </ion-col>
+
+              <ion-col class="statistique">
+                <ion-col size="6" class="span-tem ">
+                  <ion-icon class="icon2" name="thermometer-outline"></ion-icon>
+                  <p >{{weather.main.temp | number: '1.0-0'}}C°</p>
+                </ion-col>
+
+                <ion-col size="6" class="span-tem" >
+                  <ion-icon class="icon2" name="water-outline"></ion-icon>
+                  <p >{{weather.main.humidity}}%</p>
+                </ion-col>
+
+                <ion-col size="6" class="span-tem" >
+                  <ion-icon class="icon2" name="speedometer-outline"></ion-icon>
+                  <p >{{weather.main.pressure}}</p>
+                </ion-col>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid> -->
+
+          <div class="weather">
+            <ion-grid>
+              <ion-row>
+
+                <ion-col size="2" class="colStart">
+                  <ion-icon name="cloud-outline" [class]="theme.color+' weather-icon'"></ion-icon>
+
+                </ion-col>
+
+                <ion-col size="1">
+                  <p [class]="theme.family+' celcus-numb'" >{{weather.main.temp | number: '1.0-0'}} <span class="celcus">°</span> </p>
+
+                </ion-col>
+                <ion-col size="9" class="statistique-m">
+                  <div [class]="theme.family+' span-tem-m f-size-14'">
+                    <p > Humidité {{weather.main.humidity}}%</p>
+                    <p >{{weather.main.pressure}}</p>
+                    <p style="margin-bottom: 0;" >  {{weather.wind.speed}} km/h </p>
+
+                  </div>
+
+                  <div style="text-align: end;" [class]="theme.family+' span-tem-m f-size-14'" >
+                    <span class="cityName">{{weather.name}}</span>
+                    <p>{{ today| date }}<br>{{now}}</p>
+                    <p  style="margin-bottom: 0;"> {{ weather.weather[0].description ==='partly-sunny-outline' || weather.weather[0].description ==='sunny-outline' ? "Ensoleillé dans l'ensemble":"Nuageux dans l'ensemble"  }} </p>
+                  </div>
+                </ion-col>
+
+              </ion-row>
+            </ion-grid>
+          </div>
+
+        </div>
+
+      </div>
+
+       <div *ngFor="let weather of CitysArray" >
+        <ion-card *ngIf="searchWeather">
+
+          <div class="weather">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="7" class="colStart">
+                  <span class="cityName">{{weather.name}}</span>
+                </ion-col>
+                <ion-col class="colStart date-info">
+                  {{ today| date }}<br>{{now}}
+                </ion-col>
+
+                <ion-col size="7" class="colStart">
+                  <ion-icon name="{{ weather.weather[0].description  }}" class="weather-icon"></ion-icon>
+                </ion-col>
+                <ion-col class="statistique">
+                  <ion-col size="6" class="span-tem">
+                    <ion-icon class="icon2" name="thermometer-outline"></ion-icon>
+                    <p >{{weather.main.temp | number: '1.0-0'}}C°</p>
+                  </ion-col>
+
+                  <ion-col size="6" class="span-tem" >
+                    <ion-icon class="icon2" name="water-outline"></ion-icon>
+                    <p >{{weather.main.humidity}}%</p>
+                  </ion-col>
+
+                  <ion-col size="6" class="span-tem" >
+                    <ion-icon class="icon2" name="speedometer-outline"></ion-icon>
+                    <p >{{weather.main.pressure}}</p>
+                  </ion-col>
+                </ion-col>
+
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-card>
+      </div>
+
+      <div *ngFor="let weather of CitysArray" >
+        <div *ngIf="searchWeather">
+
+          <div class="weather">
+            <ion-grid>
+              <ion-row>
+
+                <ion-col size="2" class="colStart">
+                  <ion-icon name="{{ weather.weather[0].description  }}" [class]="theme.color+' weather-icon'"></ion-icon>
+
+                </ion-col>
+
+                <ion-col size="1">
+                  <p class="celcus-numb" >{{weather.main.temp | number: '1.0-0'}} <span class="celcus">C°</span> </p>
+
+                </ion-col>
+                <ion-col size="9" class="statistique-m">
+                  <div [class]="theme.family+' span-tem-m'">
+                    <p > Humidité {{weather.main.humidity}}%</p>
+                    <p >{{weather.main.pressure}}</p>
+                    <p style="margin-bottom: 0;">  {{weather.wind.speed}} km/h </p>
+
+                  </div>
+
+                  <div style="text-align: end;" [class]="theme.family+' span-tem-m'" >
+                    <span class="cityName">{{weather.name}}</span>
+                    <p>{{ today| date }}<br>{{now}}</p>
+                    <p  style="margin-bottom: 0;"> {{ weather.weather[0].description ==='partly-sunny-outline' || weather.weather[0].description ==='sunny-outline' ? "Ensoleillé dans l'ensemble":"Nuageux dans l'ensemble"  }} </p>
+                  </div>
+                </ion-col>
+
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+      </div>
+
+
+      <ion-card *ngIf="showComplete" class="autoCompletepredictions">
+        <ion-item  (click)="input = completion.structured_formatting.main_text; showComplete= false" *ngFor="let completion of autoCompletepredictions" >
+          <!-- completion.structured_formatting.main_text -->
+          <ion-label> {{completion.description}} </ion-label>
+        </ion-item>
+      </ion-card>
+
+      <div class="bottomSHeet" >
+        <div class="content ion-padding">
+          <div class="titleBottomSheet" (click)="bottomShet()">
+            <h4 class="ion-text-center">Ajouter une ville</h4>
+          </div>
+          <ion-searchbar [(ngModel)]="input" [debounce]="300" (keydown)="myAutoMapComplete($event)"  placeholder="Rechercher" ></ion-searchbar>
+          <button [class]="theme.bg+' '+theme.family+' btn-app'" (click)="getCity(input)">Ajouter</button>
+        </div>
+      </div>
+    </div>
+    </ion-card>
+  </ng-container>
+
+</app-layout-service>

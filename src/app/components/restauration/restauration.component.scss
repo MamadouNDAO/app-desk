@@ -1,0 +1,104 @@
+@use './../../../theme/variables.scss' as v;
+
+.principal{
+    background-color:  v.$blanc;
+    height: 100%;
+}
+.FirstColumn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ion-card{
+    border-radius: 25px;
+}
+.shoppingHistorical{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+span{
+    font-size: 20px;
+    color: v.$primary;
+}
+.icon{
+    color: v.$primary;
+    font-size: 35px;
+}
+.iconHIstorique{
+    color: v.$primary;
+    font-size: 35px;
+}
+
+.productIcon,.productIconSum{
+    font-size: 30px;
+    color: v.$primary;
+}
+
+.productName{
+    font-size: 15px;
+}
+
+
+.desactiveProduct{
+    opacity: 0.2;
+}
+.bottomSheet{
+    position: fixed;
+    display: none;
+    width: 100%;
+    margin-bottom: -2px;
+    bottom: 0;
+    border-radius: 30px 30px 0px 0px;
+    z-index: 20;
+    background-color: v.$blanc;
+    transform: translate3d(0,0,0);
+    font-size: 15px;
+    overflow-y: scroll;
+}
+.bottomSheetProductName{
+    color: v.$primary;
+}
+.bottomSheetProductprice{
+    color: v.$primary;
+    font-size: 18px;
+}
+.bottomSheetNameDiv{
+    text-align: center;
+    border-bottom: 0.5px solid v.$secondary;
+}
+.bottomSheetProductDescription{
+    font-size: 15px;
+    color: v.$primary;
+}
+.counterColumn{
+    text-align: center;
+}
+.alert-button {
+    color: #A0A !important;
+    font-size: 1em !important;
+}
+button{
+    width: 100px;
+    border-radius: 10px;
+    background-color: v.$primary;
+    font-size: 17px;
+    color: v.$blanc;
+    padding: 8px;
+    line-height: -1px;
+}
+.counterRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+.priceColumn{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}

@@ -1,0 +1,16 @@
+export  default {
+  color: "ivi-grey",
+  colorHtml: "var(--ion-grey)",
+  colorSearch: "var(--ion-grey)",
+  colorInput: "#d0cdcd",
+  bg: "ivi-bg-grey",
+  title: "ivi-title-grey",
+  titleList: "ivi-title-list-grey",
+  background: "ivi-bg-image-grey",
+  backgroundImage: "ivi-bg-image-grey",
+  hover: "ivi-hover-grey",
+  input: "ivi-input-grey",
+  scrollbar: 'scrollbar-grey',
+  menubg: 'menu-bg-grey',
+  welcomeText: 'ivi-welcome-text-grey',
+}

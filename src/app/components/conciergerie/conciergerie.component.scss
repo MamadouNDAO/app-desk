@@ -1,0 +1,100 @@
+@use './../../../theme/variables.scss' as v;
+
+.principal{
+    background-color:  v.$blanc;
+    height: 100%;
+}
+.FirstColumn{
+    text-align: center;
+}
+ion-card{
+    border-radius: 25px;
+}
+span{
+    font-size: 20px;
+    color: v.$primary;
+}
+.icon{
+    color: v.$primary;
+    font-size: 35px;
+}
+
+
+.centerIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bottomSheet{
+    position: fixed;
+    display: none;
+    width: 100%;
+    margin-bottom: -2px;
+    bottom: 0;
+    border-radius: 30px 30px 0px 0px;
+    z-index: 20;
+    background-color: v.$blanc;
+    transform: translate3d(0,0,0);
+    padding: 2%;
+}
+
+.bottomSheetNameDiv{
+    text-align: center;
+    border-bottom: 1px solid v.$secondary;
+    padding: .4rem 0;
+}
+button{
+    height: 30px;
+    width: 70%;
+    border-radius: 10px;
+    background-color: v.$primary;
+    font-size: 16px;
+    color: v.$blanc;
+}
+.buttonColumn{
+    text-align: center;
+}
+.priceParagraphe{
+    text-align: end;
+    color: v.$primary;
+}
+.descriptionParagraphe{
+    font-size: 14px;
+    color: v.$primary;
+}
+.moduleDetails{
+    font-size: 17px;
+}
+.moduleDetailsIcon{
+    font-size: 25px;
+    margin-right: 8px;
+}
+.moduleDetailsCurrentname{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.productIcon,.productIconSum{
+  font-size: 30px;
+  color: v.$primary;
+}
+
+.productName{
+  font-size: 14px;
+}
+
+.paymentMessage{
+  color: v.$primary;
+  font-size: 15px;
+}
+#conciergerieBottomSheet{
+  overflow-y: scroll !important;
+  padding-top: 8px !important;
+}
+
+.iconHIstorique{
+  color: v.$primary;
+  font-size: 35px;
+}
+
+

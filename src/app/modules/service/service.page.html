@@ -1,0 +1,13 @@
+<app-layout-service>
+
+  <ion-label class="header-title" headerTitle>Services</ion-label>
+  <div headerIcon>
+    <ion-icon [ngClass]="theme.color" name="notifications"></ion-icon>
+    <ion-icon class="newspaper-icon" [ngClass]="theme.color" name="newspaper"></ion-icon>
+  </div>
+  <ion-searchbar [ngClass]="theme.searchbar" inputPlace placeholder="" ></ion-searchbar>
+  <div content>
+  <ion-card style="height: 500px;" mode="ios" id="contenuService" [class]="theme.scrollbar + ' ion-padding'"   >
+  </ion-card>
+  </div>
+</app-layout-service>

@@ -1,0 +1,26 @@
+<app-layout-service>
+  <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title">Autres services</ion-label>
+  <div headerIcon>
+    <ion-icon [ngClass]="theme.color" name="notifications"></ion-icon>
+    <ion-icon class="newspaper-icon" [ngClass]="theme.color" name="newspaper"></ion-icon>
+  </div>
+  <ion-searchbar [ngClass]="theme.searchbar" inputPlace placeholder="" ></ion-searchbar>
+
+
+  <div headerIcon>
+  </div>
+
+  <div content>
+    <ion-card  style="height: 500px; overflow: hidden" mode="ios" id="contenuService" [class]="theme.scrollbar + ' ion-padding'"   >
+    <!--<ion-list lines="none">
+      <ion-item *ngFor="let doc of docs" button detail [href]="doc.url" target="_blank">
+        <ion-icon name="document-text-outline" slot="start"></ion-icon>
+        <ion-label >
+          <p> {{doc.label}} </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>-->
+    </ion-card>
+  </div>
+
+</app-layout-service>

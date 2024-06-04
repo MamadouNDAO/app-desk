@@ -1,0 +1,103 @@
+.card-enquete{
+  width: 60%;
+  margin: auto;
+  height: 200px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  span{
+    font-size: 14px;
+    text-align: center;
+  }
+  hr{
+    height: 10px;
+    width: 100%;
+    //border-top: 1px solid var(--ion-color-secondary);
+  }
+  .ivi-red-hr{
+    border-top: 1px solid var(--ion-red);
+  }
+
+  .ivi-green-hr{
+    border-top: 1px solid var(--ion-green);
+  }
+  .date-constat{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  button{
+    padding: 15px;
+    width: 100%;
+    margin-top: 30px;
+  }
+}
+
+.card-principal{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  textarea{
+    background: #fff;
+    height: 330px;
+    width: 50%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+  }
+}
+
+.card-enquete-2{
+  background: #fff;
+  width: 50%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .item-qst{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding-bottom: 10px;
+    .start-note{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 5px;
+      ion-icon{
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.ivi-red-brd-bottom{
+  border-bottom: solid 1px var(--ion-red);
+}
+
+.ivi-green-brd-bottom{
+  border-bottom: solid 1px var(--ion-green);
+}
+
+.divbtn{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;margin-top: 15px;
+  button{
+    padding: 15px;
+    color: #fff;
+    width: 50%;
+  }
+}

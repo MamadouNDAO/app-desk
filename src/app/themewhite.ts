@@ -1,0 +1,23 @@
+export  default {
+  color: "ivi-white",
+  colorHtml: "var(--ion-red)",
+  colorInput: "input-white",
+  colorSearch: "var(--ion-grey)",
+  bg: "ivi-bg-white",
+  title: "ivi-title-red",
+  titleList: "ivi-title-list-red",
+  background: "ivi-bg-image-white",
+  backgroundImage: "ivi-bg-image-white",
+  hover: "ivi-hover-red",
+  input: "ivi-input-red",
+  searchbar:"ivi-searchbar-red",
+  scrollbar: 'scrollbar-red',
+  menubg: 'menu-bg-red',
+  welcomeText: 'ivi-welcome-text-red',
+  family: 'century',
+  colorPassive: 'sci-color-passive',
+  colorActive: 'sci-color-active',
+  colorWhite: 'color-white-icon',
+  bgButton: 'bg-white-gris',
+  borderWhite: 'brd-white'
+}

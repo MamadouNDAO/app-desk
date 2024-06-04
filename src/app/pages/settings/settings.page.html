@@ -1,0 +1,30 @@
+<app-layout-service [showMenu]="false">
+  <ion-label style="font-size: 16px !important;" headerTitle class="ion-text-center" [ngClass]="theme.title">Paramètres</ion-label>
+
+  <div headerIcon>
+  </div>
+
+  <div content>
+    <ion-card style="min-height: 500px; border-radius: 0" mode="ios" id="contenuService" [class]="theme.scrollbar + ' ion-padding'"   >
+      <div class="top-icon-title">
+        <ion-label headerTitle class="ion-text-center header-title" [ngClass]="theme.title +' '+ theme.family">Paramétre notifications</ion-label>
+        <div class="icon-right" headerIcon>
+
+        </div>
+      </div>
+      <ion-list lines="none">
+        <ng-container *ngFor="let serv of services">
+          <ion-item *ngIf="serv.haveNotification">
+            <ion-icon name="notifications-sharp" [class]="theme.color" slot="start"></ion-icon>
+            <ion-label style="font-size: 14px">{{serv.label}}</ion-label>
+            <ion-toggle #check (ionChange)="enableNotif(check, serv.key)" [checked]="serv.stateNotification"  color="success" slot="end"></ion-toggle>
+          </ion-item>
+        </ng-container>
+
+      </ion-list>
+
+
+    </ion-card>
+  </div>
+
+</app-layout-service>
